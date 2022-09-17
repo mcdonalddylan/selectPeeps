@@ -1,0 +1,43 @@
+@import '../../colors.scss';
+
+.selected {
+    margin: 0.5rem;
+    text-align: end;
+    vertical-align: middle;
+    background-color: $accent-light;
+    color: $accent-dark;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.non-selected {
+    margin: 0.5rem;
+    text-align: end;
+    vertical-align: middle;
+    background-color: $accent;
+    color: $accent-dark;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.selected-dot {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border: 0;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.non-selected-dot {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border: 0;
+    border-radius: 50%;
+    background-color: $accent-dark;
+}

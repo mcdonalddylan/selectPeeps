@@ -1,0 +1,100 @@
+@import '../../colors.scss';
+
+.nav-container {
+    z-index: 100;
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 7rem;
+    background-color: $primary;
+}
+
+.nav-relative-container {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.nav-container-gradient {
+    z-index: 90;
+    height: 9rem;
+    background-image: linear-gradient(180deg, $primary, #00000000);
+}
+
+.nav-button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.reg-btn {
+    text-align: center;
+    vertical-align: middle;
+    height: 4rem;
+    padding: 1rem;
+    box-shadow: 2px 2px 0 0 $accent, 4px 4px 0 0 $accent, 6px 6px 0 0 $accent;
+    border: 0;
+    border-radius: 30px;
+    background-color: $accent-light;
+    color: $accent-dark;
+}
+
+.reg-btn:hover {
+    box-shadow: 0 0;
+    -webkit-transform: translateY(6px);
+	transform: translateY(6px);
+    transition: 0.2s;
+}
+
+.theme-btn {
+    text-align: center;
+    vertical-align: middle;
+    height: 4rem;
+    padding: 1rem;
+    box-shadow: 2px 2px 0 0 black, 4px 4px 0 0 black, 6px 6px 0 0 black;
+    border: 0;
+    border-radius: 30px;
+    background-color: $accent-dark;
+    color: $secondary;
+}
+
+.theme-btn:hover {
+    box-shadow: 0 0;
+    -webkit-transform: translateY(6px);
+	transform: translateY(6px);
+    transition: 0.2s;
+}
+
+.bulb-img {
+    width: 2rem;
+}
+
+.bg-logo-container {
+    position: relative;
+}
+
+.bg-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 7rem;
+    height: 40vw;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .bg-logo {
+        animation: logo-spin-ani infinite 70s linear;
+    }
+}
+
+@keyframes logo-spin-ani {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
