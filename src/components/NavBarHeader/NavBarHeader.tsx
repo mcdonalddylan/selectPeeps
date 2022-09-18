@@ -13,7 +13,7 @@ export const NavBarHeader = (): ReactElement => {
             <div className='nav-relative-container'>
                 <div className='nav-container-gradient'></div>
             </div>
-            <div className='nav-button-container container'>
+            <div className='nav-button-container'>
                 <div className='d-flex align-items-center'>
                     <div className='p-3'>
                         <button className='reg-btn'>

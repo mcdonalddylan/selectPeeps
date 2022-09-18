@@ -1,0 +1,15 @@
+@import '../../colors.scss';
+
+.bottom-action-container-enter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10rem;
+    background-color: $primary;
+    //animation: bot-enter-ani 0.3s linear 0s 1;
+}
+
+@keyframes bot-enter-ani {
+    from{transform: translateY(-10rem);}
+    to{transform: translateY(-1rem);}
+}

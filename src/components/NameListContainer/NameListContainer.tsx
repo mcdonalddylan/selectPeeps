@@ -6,7 +6,9 @@ export const NameListContainer = (): ReactElement => {
 
     const data = [{ name: 'Bob', selected: 'X' }, { name: 'Willy', selected: 'O' },
             { name: 'Pippy', selected: 'X' }, { name: 'Skippy', selected: 'X' },
-            { name: 'Poppy', selected: 'X' }, { name: 'Slippy', selected: 'X' }];
+            { name: 'Poppy', selected: 'X' }, { name: 'Slippy', selected: 'X' },
+            { name: 'Stinkp', selected: 'X' }, { name: 'Dinkis', selected: 'X' },
+            { name: 'Winky', selected: 'X' }, { name: 'Boba', selected: 'X' }];
     return (
         <div className='container d-flex name-list-container'>
             <div className='flex-row'>

@@ -9,6 +9,15 @@
     padding: 1rem;
     border-radius: 5px;
     transition: all 0.3s;
+    animation: box-glow-ani infinite 1s ease;
+}
+
+@keyframes box-glow-ani {
+    0% {background-color: $accent-light;}
+
+    50% {background-color: $glow;}
+
+    100% {background-color: $accent-light;}
 }
 
 .non-selected {
@@ -27,9 +36,18 @@
     margin-right: 1rem;
     width: 1rem;
     height: 1rem;
-    border: 0;
+    border: 0.2rem solid $accent;
     border-radius: 50%;
     background-color: white;
+    animation: dot-glow-ani infinite 1s ease;
+}
+
+@keyframes dot-glow-ani {
+    0% {border: 0.2rem solid $glow;}
+
+    50% {border: 0.2rem solid $accent;}
+
+    100% {border: 0.2rem solid $glow;}
 }
 
 .non-selected-dot {
