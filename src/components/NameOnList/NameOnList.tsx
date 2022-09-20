@@ -4,6 +4,7 @@ import './NameOnList.scss';
 interface  INameOnListProps {
     name: string;
     selected: string;
+    highlighted?: boolean;
 };
 
 export const NameOnList = ({name, selected}: INameOnListProps): ReactElement => {

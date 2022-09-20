@@ -1,22 +1,20 @@
 import { ReactElement } from 'react';
+import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { NameOnList } from '../NameOnList/NameOnList';
 import './NameListContainer.scss';
 
 export const NameListContainer = (): ReactElement => {
+    const { nameData, currentPage } = usePageDataContext();
 
-    const data = [{ name: 'Bob', selected: 'X' }, { name: 'Willy', selected: 'O' },
-            { name: 'Pippy', selected: 'X' }, { name: 'Skippy', selected: 'X' },
-            { name: 'Poppy', selected: 'X' }, { name: 'Slippy', selected: 'X' },
-            { name: 'Stinkp', selected: 'X' }, { name: 'Dinkis', selected: 'X' },
-            { name: 'Winky', selected: 'X' }, { name: 'Boba', selected: 'X' }];
     return (
         <div className='container d-flex name-list-container'>
             <div className='flex-row'>
-                {data.map((person, index) => {
+                {nameData ? nameData.map((person: any, index: number) => {
                     return (
-                        <NameOnList key={index} name={person.name} selected={person.selected} />
+                        <NameOnList key={index} name={person?.techtronames} selected={person?.techtroselected} />
                     )
-                })}
+                })
+            : null}
             </div>
         </div>
     );

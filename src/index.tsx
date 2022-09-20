@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css'; // adding bootstrap to the project
-import {SelectPeepsWebAppContainer} from './components/SelectPeepsWebAppContainer';
+import { SelectPeepsWebAppContainer } from './components/SelectPeepsWebAppContainer';
 import reportWebVitals from './reportWebVitals';
+import { PageDataProvider } from './context/PageDataProvider/PageDataProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <SelectPeepsWebAppContainer />
+    <PageDataProvider>
+      <SelectPeepsWebAppContainer />
+    </PageDataProvider>
   </React.StrictMode>
 );
 

@@ -1,15 +1,50 @@
 @import '../../colors.scss';
 
-.bottom-action-container-enter {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 10rem;
-    background-color: $primary;
-    //animation: bot-enter-ani 0.3s linear 0s 1;
+.bottom-action-container {
+    position: relative;
+
+    .bottom-action-enter {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 10rem;
+        background-color: $primary;
+        animation: bot-enter-ani 0.3s ease-out 0s 1;
+    }
+
+    .bottom-action-exit {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 10rem;
+        background-color: $primary;
+        animation: bot-exit-ani 0.3s ease-in 0s 1;
+    }
 }
 
 @keyframes bot-enter-ani {
-    from{transform: translateY(-10rem);}
-    to{transform: translateY(-1rem);}
+    from{transform: translateY(10rem);}
+    to{transform: translateY(0);}
+}
+
+@keyframes bot-exit-ani {
+    from{transform: translateY(0rem);}
+    to{transform: translateY(11rem);}
+}
+
+.randomize-button {
+    border: 0;
+    border-radius: 15px;
+    padding: 2rem;
+    font-size: xx-large;
+    color: $glow;
+    background: $tertiary;
+    box-shadow: 2px 2px 0 0 black, 4px 4px 0 0 black, 6px 6px 0 0 black;
+}
+
+.randomize-button:hover {
+    box-shadow: 0 0;
+    -webkit-transform: translateY(6px);
+    transform: translateY(6px);
+    transition: all 0.3s ease;
 }

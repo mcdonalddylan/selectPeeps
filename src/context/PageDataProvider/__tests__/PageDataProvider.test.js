@@ -1,8 +1,25 @@
 import { NavBarHeader } from "../NavBarHeader";
+import axios from 'axios';
 import { render, screen } from '@testing-library/react';
+import { PageDataProvider } from "../PageDataProvider";
 
-test('renders nav bar text', () => {
-    render(<NavBarHeader />);
-    const text = screen.getByText(/ayyyy/i);
-    expect(text).toBeInTheDocument();
+jest.mock('axios');
+
+describe('<PageDataProvider />', () => {
+    let mockData;
+
+    beforeEach(() => {
+        mockData = {}
+        axios.get.mockResolvedValue(mockData);
+    });
+
+    test('renders nav bar text', () => {
+        render(
+            <PageDataProvider>
+                <div data-testid='providerTest'></div>
+            </PageDataProvider>
+        );
+        const testChildElement = screen.getByTestId(/providerTest/i);
+        expect(testChildElement).toBeInTheDocument();
+    });
 });
