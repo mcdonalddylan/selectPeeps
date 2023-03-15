@@ -1,13 +1,22 @@
 import { ReactElement } from "react";
 import { usePageDataContext } from "../../context/PageDataProvider/PageDataProvider";
 import { formatMessage } from "../../utils/translationUtils/translationUtils";
+import bulb from '../../assets/light-bulb.svg';
 import './ChangeLanguageButton.scss';
 
 export const ChangeLanguageButton = (): ReactElement => {
-    const { currentLanguage, changeCurrentLanguage } = usePageDataContext();
+    const { isLightOn, setIsLightOn, currentLanguage, changeCurrentLanguage } = usePageDataContext();
 
     return (
         <div className='language-button-container'>
+            <button
+                className='theme-btn'
+                onClick={() => {
+                    setIsLightOn(!isLightOn);
+                }}
+            >
+                <img src={bulb} alt='change-dark-light' className='bulb-img'/>
+            </button>
             <button
                 className='language-button'
                 onClick={() => {

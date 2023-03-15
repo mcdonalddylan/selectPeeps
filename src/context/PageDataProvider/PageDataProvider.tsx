@@ -84,7 +84,7 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
 
     useEffect(() => {
         if (!isLoadingNames && !hasErrorNames && !nameData) {
-            //getListOfNamesData();
+            getListOfNamesData();
         }
     }, [nameData]);
 

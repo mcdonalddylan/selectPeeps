@@ -15,6 +15,13 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         cn: '团队会议',
         al: '*)(@!$$#'
     },
+    'Site.Pointing.Button': {
+        en: 'Pointing',
+        hi: 'ओर इशारा करते हुए',
+        es: 'Puntuación',
+        cn: '计分会',
+        al: '*$%(^$%'
+    },
     'Site.Language.Button': {
         en: 'Change Language',
         hi: 'भाषा बदलो',

@@ -1,12 +1,11 @@
 import { ReactElement } from 'react';
 import './NavBarHeader.scss';
 import logo from '../../assets/logo.svg';
-import bulb from '../../assets/light-bulb.svg';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 
 export const NavBarHeader = (): ReactElement => {
-    const { isLightOn, setIsLightOn, currentLanguage, setCurrentPage, currentPage } = usePageDataContext();
+    const { currentLanguage, setCurrentPage, currentPage } = usePageDataContext();
 
     return (
         <div className='nav-container'>
@@ -44,12 +43,14 @@ export const NavBarHeader = (): ReactElement => {
                     </div>
                     <div className='p-3'>
                         <button
-                            className='theme-btn'
+                            className='reg-btn'
                             onClick={() => {
-                                setIsLightOn(!isLightOn);
+                                if(currentPage !== 'techtro') {
+                                    setCurrentPage('techtro');
+                                }
                             }}
                         >
-                            <img src={bulb} alt='change-dark-light' className='bulb-img'/>
+                            {formatMessage('Site.Pointing.Button', currentLanguage)}
                         </button>
                     </div>
                 </div>

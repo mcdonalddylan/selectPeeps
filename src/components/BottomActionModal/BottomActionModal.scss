@@ -23,13 +23,13 @@
 }
 
 @keyframes bot-enter-ani {
-    from{transform: translateY(10rem);}
+    from{transform: translateY(10rem); bottom: 0;}
     to{transform: translateY(0);}
 }
 
 @keyframes bot-exit-ani {
     from{transform: translateY(0rem);}
-    to{transform: translateY(11rem);}
+    to{transform: translateY(11rem); bottom: 11rem;}
 }
 
 .randomize-button {
@@ -47,4 +47,21 @@
     -webkit-transform: translateY(6px);
     transform: translateY(6px);
     transition: all 0.3s ease;
+}
+
+@media only screen and (max-width: 768px) {
+    .bottom-action-container {
+        .bottom-action-enter {
+            height: 8rem;
+        }
+
+        .bottom-action-exit {
+            height: 8rem;
+        }
+
+        .randomize-button {
+            padding: 0.5rem;
+            font-size: large;
+        }
+    }
 }

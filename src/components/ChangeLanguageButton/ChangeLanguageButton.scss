@@ -22,4 +22,52 @@
         transform: translateY(6px);
         transition: all 0.3s ease;
     }
+
+    .theme-btn {
+        position: fixed;
+        bottom: 0;
+        right: 13rem;
+        text-align: center;
+        margin: 1rem;
+        vertical-align: middle;
+        height: 4rem;
+        padding: 1rem;
+        box-shadow: 2px 2px 0 0 black, 4px 4px 0 0 black, 6px 6px 0 0 black;
+        border: 0;
+        background-color: $accent-dark;
+        transition: all 0.3s ease;
+    }
+    
+    .theme-btn:hover {
+        box-shadow: 0 0;
+        -webkit-transform: translateY(6px);
+        transform: translateY(6px);
+        transition: 0.2s;
+    }
+    
+    .bulb-img {
+        width: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .language-button-container {
+        position: relative;
+    
+        .theme-btn {
+            margin: 0.5rem;
+            height: 2.5rem;
+            padding: 0.5rem;
+            right: 10rem;
+        }
+
+        .bulb-img {
+            width: 1.1rem;
+        }
+
+        .language-button {
+            margin: 0.6rem;
+            padding: 0.5rem;
+        }
+    }
 }
