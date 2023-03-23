@@ -1,11 +1,21 @@
 {
   "name": "select-peeps-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://mcdonalddylan.github.io/SelectPeeps",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcdonalddylan/selectPeeps.git"
+  },
   "scripts": {
+    "predeploy": "npm run build:production",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "start:local": "cross-env REACT_APP_ENV=local npm run start",
+    "start:prod": "cross-env REACT_APP_ENV=production npm run start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build:production": "cross-env REACT_APP_ENV=production npm run build",
+    "test": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -20,8 +30,8 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
+    "cross-env": "^7.0.3",
     "react": "^18.2.0",
-    "react-db-google-sheets": "^2.1.1",
     "react-dom": "^18.2.0",
     "sass": "^1.54.9",
     "typescript": "^4.8.3",

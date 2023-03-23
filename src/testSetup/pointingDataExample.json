@@ -1,0 +1,89 @@
+[
+    {
+        "storyName": "Long story title dude",
+        "timeStamp": "2020-06-13T18:30:00.000Z",
+        "team": "Get Support",
+        "members":
+        [
+            {
+                "pointId": 12345,
+                "pointName":"Steve",
+                "pointValue": 5
+            },
+            {
+                "pointId": 12346,
+                "pointName":"Bob",
+                "pointValue": 5
+            },
+            {
+                "pointId": 12347,
+                "pointName":"Will",
+                "pointValue": 3
+            },
+            {
+                "pointId": 12348,
+                "pointName":"Billy",
+                "pointValue": -1
+            }
+        ],
+        "chosenPointValue": 5
+    },
+    {
+        "storyName": "Story 321",
+        "timeStamp": "2020-06-13T19:30:00.000Z",
+        "team": "Get Support",
+        "members":
+        [
+            {
+                "pointId": 12345,
+                "pointName":"Steve",
+                "pointValue": -1
+            },
+            {
+                "pointId": 12346,
+                "pointName":"Bob",
+                "pointValue": -1
+            },
+            {
+                "pointId": 12347,
+                "pointName":"Will",
+                "pointValue": -1
+            },
+            {
+                "pointId": 12348,
+                "pointName":"Billy",
+                "pointValue": -1
+            }
+        ],
+        "chosenPointValue": -1
+    },
+    {
+        "storyName": "Story 890",
+        "timeStamp": "2020-06-13T17:30:00.000Z",
+        "team": "CSR",
+        "members":
+        [
+            {
+                "pointId": 12345,
+                "pointName":"Steve",
+                "pointValue": 2
+            },
+            {
+                "pointId": 12346,
+                "pointName":"Bob",
+                "pointValue": 2
+            },
+            {
+                "pointId": 12347,
+                "pointName":"Will",
+                "pointValue": 2
+            },
+            {
+                "pointId": 12348,
+                "pointName":"Billy",
+                "pointValue": 3
+            }
+        ],
+        "chosenPointValue": 2
+    }
+]

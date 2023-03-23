@@ -4,11 +4,13 @@ import { ChangeLanguageButton } from './ChangeLanguageButton/ChangeLanguageButto
 import { NavBarHeader } from './NavBarHeader/NavBarHeader';
 import { SelectPeepsBodyContainer } from './SelectPeepsBodyContainer/SelectPeepsBodyContainer';
 import './SelectPeepsWebAppContainer.scss';
+import { TeamSelectContainer } from './TeamSelectContainer/TeamSelectContainer';
 
 export const SelectPeepsWebAppContainer = (): ReactElement => {
   return (
     <>
       <NavBarHeader />
+      <TeamSelectContainer />
       <SelectPeepsBodyContainer />
       <BottomActionModal />
       <ChangeLanguageButton />

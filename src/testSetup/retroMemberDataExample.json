@@ -1,0 +1,26 @@
+[
+    {
+        "id": 12345,
+        "name":"Dingy",
+        "isSelected": true,
+        "team": "Get Support"
+    },
+    {
+        "id": 12346,
+        "name":"Wingus",
+        "isSelected": false,
+        "team": "Get Support"
+    },
+    {
+        "id": 12347,
+        "name":"Flingus",
+        "isSelected": false,
+        "team": "Get Support"
+    },
+    {
+        "id": 12348,
+        "name":"Paul",
+        "isSelected": false,
+        "team": "Get Support"
+    }
+]

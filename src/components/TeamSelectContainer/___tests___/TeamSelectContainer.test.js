@@ -1,8 +1,8 @@
-import { NameListContainer } from '../NameListContainer';
+import { TeamSelectContainer } from '../TeamSelectContainer';
 import { render, screen } from '@testing-library/react';
 
 test('renders nav bar text', () => {
-    render(<NameListContainer />);
+    render(<TeamSelectContainer />);
     const text = screen.getByText(/ayyyy/i);
     expect(text).toBeInTheDocument();
 });

@@ -22,6 +22,13 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         cn: '计分会',
         al: '*$%(^$%'
     },
+    'Site.Pointing.AvgPoints': {
+        en: 'Average Points',
+        hi: 'ओर इशारा',
+        es: 'Puntuación',
+        cn: '计分',
+        al: '&&@@#%'
+    },
     'Site.Language.Button': {
         en: 'Change Language',
         hi: 'भाषा बदलो',
@@ -56,5 +63,26 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         es: 'Escriba el nombre del nuevo miembro aquí',
         cn: '在此处输入新成员的姓名',
         al: '#$%^*#@@$@@@@#@'
+    },
+    'Site.TeamSelect.Team': {
+        en: 'Team',
+        hi: 'यहां',
+        es: 'Escriba',
+        cn: '在此',
+        al: '#$'
+    },
+    'Site.TeamSelect.Get Support': {
+        en: 'Get Support',
+        hi: 'Get Support',
+        es: 'Get Support',
+        cn: 'Get Support',
+        al: '**(&*^%'
+    },
+    'Site.TeamSelect.CSR': {
+        en: 'CSR',
+        hi: 'CSR',
+        es: 'CSR',
+        cn: 'CSR',
+        al: '#%&$##'
     }
 }

@@ -10,13 +10,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// Google sheets loading styling
-const config = {
-  dataLoading: {
-    className: 'google-loading-spinner'
-  }
-}
-
 root.render(
   <React.StrictMode>
       <PageDataProvider>

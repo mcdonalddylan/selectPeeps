@@ -22,9 +22,13 @@ export type TPageTranslationKeys = (
     'Site.Techtro.Button' |
     'Site.Retro.Button' |
     'Site.Pointing.Button' |
+    'Site.Pointing.AvgPoints' |
     'Site.Language.Button' |
     'Site.Randomize.Button' |
     'Site.NextPerson.Button' |
     'Site.AddNewPerson.Title' |
-    'Site.AddNewPerson.Placeholder'
+    'Site.AddNewPerson.Placeholder' |
+    'Site.TeamSelect.Team' |
+    'Site.TeamSelect.Get Support' |
+    'Site.TeamSelect.CSR'
 );

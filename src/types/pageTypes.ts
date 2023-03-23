@@ -1,4 +1,10 @@
 export type TAvailablePages = (
     'retro' |
-    'techtro'
+    'techtro' |
+    'pointing'
+);
+
+export type TAvailableTeams = (
+    'Get Support' |
+    'CSR'
 );

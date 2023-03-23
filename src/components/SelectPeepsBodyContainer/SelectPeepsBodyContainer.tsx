@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
-import { AddRemovePeopleModal } from '../AddRemovePeopleModal/AddRemovePeopleModal';
-import { NameListContainer } from '../NameListContainer/NameListContainer';
+import { AddRemoveModal } from '../AddRemoveModal/AddRemoveModal';
+import { DataListContainer } from '../DataListContainer/DataListContainer';
 import './SelectPeepsBodyContainer.scss';
 
 export const SelectPeepsBodyContainer = (): ReactElement => {
@@ -12,8 +12,8 @@ export const SelectPeepsBodyContainer = (): ReactElement => {
             <div className='container d-flex justify-content-center'>
                 <div className='flex-row'>
                     <div className='p-12 select-container-fg'>
-                        <NameListContainer />
-                        <AddRemovePeopleModal />
+                        <DataListContainer />
+                        <AddRemoveModal />
                     </div>
                 </div>
             </div>

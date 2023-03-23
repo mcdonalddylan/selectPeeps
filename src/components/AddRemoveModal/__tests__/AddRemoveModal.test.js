@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { AddRemovePeopleModal } from '../AddRemovePeopleModal';
+import { AddRemoveModal } from '../AddRemoveModal';
 
 test('renders nav bar text', () => {
-  render(<AddRemovePeopleModal />);
+  render(<AddRemoveModal />);
   const textElement = screen.getByText(/idk bro/i);
   expect(textElement).toBeInTheDocument();
 });

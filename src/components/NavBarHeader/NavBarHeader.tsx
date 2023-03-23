@@ -45,8 +45,8 @@ export const NavBarHeader = (): ReactElement => {
                         <button
                             className='reg-btn'
                             onClick={() => {
-                                if(currentPage !== 'techtro') {
-                                    setCurrentPage('techtro');
+                                if(currentPage !== 'pointing') {
+                                    setCurrentPage('pointing');
                                 }
                             }}
                         >

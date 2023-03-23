@@ -10,9 +10,10 @@ export const ChangeLanguageButton = (): ReactElement => {
     return (
         <div className='language-button-container'>
             <button
-                className='theme-btn'
+                className={`${isLightOn ? 'theme-btn-light' : 'theme-btn'}`}
                 onClick={() => {
                     setIsLightOn(!isLightOn);
+                    localStorage.setItem('lightOnPreference', `${!isLightOn}`);
                 }}
             >
                 <img src={bulb} alt='change-dark-light' className='bulb-img'/>
