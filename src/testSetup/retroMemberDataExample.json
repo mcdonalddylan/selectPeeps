@@ -13,14 +13,20 @@
     },
     {
         "id": 12347,
-        "name":"Flingus",
+        "name":"Flingus BoDingus",
         "isSelected": false,
         "team": "Get Support"
     },
     {
         "id": 12348,
         "name":"Paul",
+        "isSelected": true,
+        "team": "CSR"
+    },
+    {
+        "id": 12349,
+        "name":"Smaul",
         "isSelected": false,
-        "team": "Get Support"
+        "team": "CSR"
     }
 ]

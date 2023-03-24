@@ -1,7 +1,8 @@
 [
     {
+        "storyId": 0,
         "storyName": "Long story title dude",
-        "timeStamp": "2020-06-13T18:30:00.000Z",
+        "timeStamp": "2020-06-13T14:30:00.000Z",
         "team": "Get Support",
         "members":
         [
@@ -29,6 +30,7 @@
         "chosenPointValue": 5
     },
     {
+        "storyId": 1,
         "storyName": "Story 321",
         "timeStamp": "2020-06-13T19:30:00.000Z",
         "team": "Get Support",
@@ -58,6 +60,7 @@
         "chosenPointValue": -1
     },
     {
+        "storyId": 2,
         "storyName": "Story 890",
         "timeStamp": "2020-06-13T17:30:00.000Z",
         "team": "CSR",

@@ -16,6 +16,7 @@
     border-radius: 20px;
     width: 40rem;
     transition: all 0.3s ease;
+    margin: auto;
 
     h1 {
         padding: 1rem 13rem 0 2rem;
@@ -32,9 +33,15 @@
         margin: 0;
     }
 
-    .pointer-row:nth-child(even) {
+    .pointer-row-container:nth-child(even) {
         background-color: #0000000a;
         border-radius: 20px;
+    }
+
+    .pointer-name-row {
+        width: 50%;
+        text-align: center;
+        margin: auto;
     }
 
     .chosen-point-container {
@@ -70,10 +77,67 @@
     }
 }
 
+.point-data-history-container {
+    margin: 1rem auto 1rem;
+    background-color: $accent-tint;
+    color: $accent-dark;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 45rem;
+
+    .story-header-container {
+        margin: 0 !important;
+        height: 2.5rem;
+        padding: 1rem 0.5rem;
+
+        h4 {
+            vertical-align: middle;
+            margin: 0;
+        }
+    }
+
+    .story-row-selected {
+        margin: 0;
+        height: 2.5rem;
+        border: 1px solid $accent-dark;
+        padding: 1rem 0.5rem;
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 0 $accent-dark, 4px 4px 0 0 $accent-dark;
+
+        p {
+            vertical-align: middle;
+            margin: 0;
+            font-size: 16px;
+        }
+    }
+
+    .story-row-unselected {
+        margin: 0;
+        height: 2.5rem;
+        border: 1px solid $accent-dark;
+        padding: 1rem 0.5rem;
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 0 $accent-dark;
+
+        p {
+            vertical-align: middle;
+            margin: 0;
+            font-size: 16px;
+        }
+    }
+
+    .history-hr {
+        border: 1px solid $accent-dark;
+        margin: 1rem 0 1rem;;
+        padding: 0;
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .point-data-container {
         border-radius: 6px;
-        width: 14rem;
+        width: 16rem;
 
         h1 {
             font-size: 18px;
@@ -83,6 +147,10 @@
 
         p {
             font-size: 13px;
+        }
+
+        .pointer-name-row {
+            width: 60%;
         }
 
         .chosen-point-container {
@@ -105,6 +173,51 @@
             background-color: $accent;
             border-radius: 20px;
             padding: 3px 5px;
+        }
+    }
+
+    .point-data-history-container {
+        padding: 0.5rem;
+        width: 16rem;
+
+        .story-header-container {
+            margin: 0;
+            height: 2.5rem;
+            padding: 1rem 0.5rem;
+    
+            h4 {
+                font-size: 11px;
+            }
+        }
+    
+        .story-row-selected {
+            margin: 0;
+            height: 2.5rem;
+            border: 1px solid $accent-dark;
+            padding: 1rem 0.5rem;
+            border-radius: 10px;
+            box-shadow: 2px 2px 0 0 $accent-dark, 4px 4px 0 0 $accent-dark;
+    
+            p {
+                vertical-align: middle;
+                margin: 0;
+                font-size: 11px;
+            }
+        }
+    
+        .story-row-unselected {
+            margin: 0;
+            height: 2.5rem;
+            border: 1px solid $accent-dark;
+            padding: 1rem 0.5rem;
+            border-radius: 10px;
+            box-shadow: 2px 2px 0 0 $accent-dark;
+    
+            p {
+                vertical-align: middle;
+                margin: 0;
+                font-size: 11px;
+            }
         }
     }
 }

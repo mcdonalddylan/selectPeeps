@@ -31,6 +31,12 @@ interface IPageDataProviderContext {
     updateTechtroMemberData: Function;
     getPointingData: Function;
     updatePointingData: Function;
+    isRandomizing: boolean;
+    setIsRandomizing: Function;
+    nameData: any | null;
+    setNameData: Function;
+    pointData: any | null;
+    setPointData: Function;
 }
 
 interface IPageDataProviderProps {
@@ -50,18 +56,27 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
         };
     }, []);
     
-    const [currentPage, setCurrentPage] = useState<TAvailablePages>('retro');
+    const [currentPage, setCurrentPage] = useState<TAvailablePages>(localStorage.getItem('pagePreference') ? localStorage.getItem('pagePreference') as TAvailablePages: 'retro');
     const [selectedTeam, setSelectedTeam] = useState<TAvailableTeams>(localStorage.getItem('teamPreference') ? localStorage.getItem('teamPreference') as TAvailableTeams : 'Get Support');
-    const [isLightOn, setIsLightOn] = useState(localStorage.getItem('lightOnPreference') ? localStorage.getItem('lightOnPreference') === 'true' : false);
+    const [isLightOn, setIsLightOn] = useState<boolean>(localStorage.getItem('lightOnPreference') ? localStorage.getItem('lightOnPreference') === 'true' : false);
     const [currentLanguage, setCurrentLanguage] = useState<TSupportLanguages>(localStorage.getItem('languagePreference') ? localStorage.getItem('languagePreference') as TSupportLanguages : 'en');
-    const [shouldShowBottomAction, setShouldShowBottomAction] = useState(true);
-    const [shouldShowAddRemove, setShouldShowAddRemove] = useState(false);
+    const [shouldShowBottomAction, setShouldShowBottomAction] = useState<boolean>(true);
+    const [shouldShowAddRemove, setShouldShowAddRemove] = useState<boolean>(false);
+    const [isRandomizing, setIsRandomizing] = useState<boolean>(false);
+    const [nameData, setNameData] = useState<any[] | null>(null);
+    const [pointData, setPointData] = useState<any[] | null>(null);
 
     useEffect(() => {
         if (isLocalEnvironment) {
             console.log('current page is: ', currentPage);
         };
     }, [currentPage]);
+
+    useEffect(() => {
+        if (isLocalEnvironment) {
+            console.log('current selected team is: ', selectedTeam);
+        };
+    }, [selectedTeam]);
 
     const changeCurrentLanguage = (language: TSupportLanguages) => {
         switch(language){
@@ -156,7 +171,13 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
                 getTechtroMemberData,
                 updateTechtroMemberData,
                 getPointingData,
-                updatePointingData
+                updatePointingData,
+                isRandomizing,
+                setIsRandomizing,
+                nameData,
+                setNameData,
+                pointData,
+                setPointData
             }}
         >
             {children}

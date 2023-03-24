@@ -9,12 +9,12 @@ interface  INameOnListProps {
 
 export const NameOnList = ({name, selected}: INameOnListProps): ReactElement => {
     return (
-        <div className={`p-3 ${selected ? 'selected' : 'non-selected'}`}>
-            <div className='flex-row'>
+        <div className={`p3 ${selected ? 'selected' : 'non-selected'}`}>
+            <div className='flex-row d-flex align-items-center name-row'>
                 <div className='p-3'>
-                    <div className={`${selected ? 'selected-dot' : 'non-selected-dot'}`}></div>
+                    <div className={selected ? 'selected-dot' : 'non-selected-dot'}></div>
                 </div>
-                <div className='p-9'>
+                <div className='p-9 name-flex'>
                     <span>{name}</span>
                 </div>
             </div>

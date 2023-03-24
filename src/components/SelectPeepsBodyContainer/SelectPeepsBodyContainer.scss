@@ -4,7 +4,7 @@
     z-index: -11;
     width: 100%;
     height: 100vh;
-    background-color: $tertiary;
+    background-image: linear-gradient(180deg, $tertiary, $primary);
     position: relative;
     transition: all 0.3s;
 }
@@ -13,7 +13,7 @@
     z-index: -11;
     width: 100%;
     height: 100vh;
-    background-color: $secondary;
+    background-image: linear-gradient(180deg, $secondary, $accent-light);
     position: relative;
     transition: all 0.3s;
 }

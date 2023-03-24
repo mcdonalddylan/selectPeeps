@@ -39,9 +39,30 @@
     border-radius: 30px;
     background-color: $accent-light;
     color: $accent-dark;
+    transition: all 0.2s ease;
 }
 
-.reg-btn:hover {
+.selected-btn {
+    text-align: center;
+    vertical-align: middle;
+    font-size: x-large;
+    font-weight: bolder;
+    height: 6rem;
+    padding: 1.75rem;
+    border: 0;
+    border-radius: 30px;
+    background-color: $alert-success;
+    color: black;
+    transition: all 0.2s ease;
+    -webkit-transform: translateY(6px);
+	transform: translateY(6px);
+}
+
+.selected-btn:hover, .selected-btn:active {
+    cursor: default;
+}
+
+.reg-btn:hover, .reg-btn:active {
     box-shadow: 0 0;
     -webkit-transform: translateY(6px);
 	transform: translateY(6px);
@@ -95,6 +116,13 @@
 
     .reg-btn {
         font-size: 1rem;
+        font-weight: bold;
+        height: 3rem;
+        padding: 0.5rem;
+    }
+
+    .selected-btn {
+        font-size: 1.25rem;
         font-weight: bold;
         height: 3rem;
         padding: 0.5rem;

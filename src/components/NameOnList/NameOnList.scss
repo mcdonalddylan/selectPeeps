@@ -1,15 +1,17 @@
 @import '../../colors.scss';
 
 .selected {
-    margin: 0.5rem;
-    text-align: end;
+    margin: 0.25rem;
+    text-align: left;
     vertical-align: middle;
     background-color: $accent-light;
     color: $accent-dark;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 5px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     animation: box-glow-ani infinite 1s ease;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 @keyframes box-glow-ani {
@@ -21,14 +23,18 @@
 }
 
 .non-selected {
-    margin: 0.5rem;
-    text-align: end;
+    margin: 0.25rem;
+    text-align: left;
     vertical-align: middle;
     background-color: $accent;
     color: $accent-dark;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 5px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+}
+
+.name-flex {
+    padding-right: 1rem;
 }
 
 .non-selected:nth-child(odd) {
@@ -37,7 +43,6 @@
 
 .selected-dot {
     display: inline-block;
-    margin-right: 1rem;
     width: 1rem;
     height: 1rem;
     border: 0.2rem solid $accent;
@@ -56,10 +61,13 @@
 
 .non-selected-dot {
     display: inline-block;
-    margin-right: 1rem;
     width: 1rem;
     height: 1rem;
     border: 0;
     border-radius: 50%;
     background-color: $accent-dark;
+}
+
+.name-row {
+    vertical-align: middle;
 }

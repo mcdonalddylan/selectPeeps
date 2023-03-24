@@ -5,7 +5,7 @@ import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvi
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 
 export const NavBarHeader = (): ReactElement => {
-    const { currentLanguage, setCurrentPage, currentPage } = usePageDataContext();
+    const { currentLanguage, setCurrentPage, currentPage, isRandomizing } = usePageDataContext();
 
     return (
         <div className='nav-container'>
@@ -19,9 +19,10 @@ export const NavBarHeader = (): ReactElement => {
                 <div className='d-flex align-items-center'>
                     <div className='p-3'>
                         <button
-                            className='reg-btn'
+                            className={currentPage === 'retro' ? 'selected-btn': 'reg-btn'}
                             onClick={() => {
-                                if(currentPage !== 'retro') {
+                                if(currentPage !== 'retro' && !isRandomizing) {
+                                    localStorage.setItem('pagePreference', 'retro');
                                     setCurrentPage('retro');
                                 }
                             }}
@@ -31,9 +32,10 @@ export const NavBarHeader = (): ReactElement => {
                     </div>
                     <div className='p-3'>
                         <button
-                            className='reg-btn'
+                            className={currentPage === 'techtro' ? 'selected-btn': 'reg-btn'}
                             onClick={() => {
-                                if(currentPage !== 'techtro') {
+                                if(currentPage !== 'techtro' && !isRandomizing) {
+                                    localStorage.setItem('pagePreference', 'techtro');
                                     setCurrentPage('techtro');
                                 }
                             }}
@@ -43,9 +45,10 @@ export const NavBarHeader = (): ReactElement => {
                     </div>
                     <div className='p-3'>
                         <button
-                            className='reg-btn'
+                            className={currentPage === 'pointing' ? 'selected-btn': 'reg-btn'}
                             onClick={() => {
-                                if(currentPage !== 'pointing') {
+                                if(currentPage !== 'pointing' && !isRandomizing) {
+                                    localStorage.setItem('pagePreference', 'pointing');
                                     setCurrentPage('pointing');
                                 }
                             }}

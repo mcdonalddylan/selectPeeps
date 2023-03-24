@@ -20,7 +20,13 @@
     {
         "id": 12348,
         "name":"Billy",
+        "isSelected": true,
+        "team": "CSR"
+    },
+    {
+        "id": 12349,
+        "name":"Willy",
         "isSelected": false,
-        "team": "Get Support"
+        "team": "CSR"
     }
 ]

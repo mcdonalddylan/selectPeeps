@@ -32,7 +32,7 @@
     to{transform: translateY(11rem); bottom: 11rem;}
 }
 
-.randomize-button {
+.bottom-button {
     border: 0;
     border-radius: 15px;
     padding: 2rem;
@@ -42,11 +42,35 @@
     box-shadow: 2px 2px 0 0 black, 4px 4px 0 0 black, 6px 6px 0 0 black;
 }
 
-.randomize-button:hover {
+.bottom-button:hover, .bottom-button:active {
     box-shadow: 0 0;
     -webkit-transform: translateY(6px);
     transform: translateY(6px);
     transition: all 0.3s ease;
+}
+
+.randomize-button {
+    border: 0;
+    border-radius: 15px;
+    padding: 2rem;
+    font-size: xx-large;
+    color: $glow;
+    background: $tertiary;
+    box-shadow: 2px 2px 0 0 black, 4px 4px 0 0 black, 6px 6px 0 0 black;
+    animation: rand-btn-ani infinite 1s ease;
+}
+
+.randomize-button:hover, .randomize-button:active {
+    cursor: default;
+}
+
+@keyframes rand-btn-ani {
+    0% {background-color: $alert-success;}
+    20% {background-color: $alert-warning;}
+    40% {background-color: $accent-tint;}
+    60% {background-color: $alert-error;}
+    80% {background-color: $accent-light;}
+    100% {background-color: $alert-success;}
 }
 
 @media only screen and (max-width: 768px) {
@@ -57,6 +81,11 @@
 
         .bottom-action-exit {
             height: 8rem;
+        }
+
+        .bottom-button {
+            padding: 0.5rem;
+            font-size: large;
         }
 
         .randomize-button {
