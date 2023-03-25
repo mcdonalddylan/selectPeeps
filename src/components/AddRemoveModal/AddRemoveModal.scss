@@ -24,10 +24,11 @@
         z-index: 9999;
         width: 30rem;
         height: 25rem;
-        background-color: $accent-light;
+        background-image: linear-gradient(-45deg, #272b2e, $tertiary, #272b2e);
+        background-size: 300%, 300%;
         padding: 4rem;
         border-radius: 40px;
-        box-shadow: 0px 20px 50px black;
+        box-shadow: 2px 2px $primary, 4px 4px $primary, 6px 6px $primary, 8px 8px $primary;
 
         h4 {
             color: $accent-dark;
@@ -42,6 +43,7 @@
             font-size: 20px;
             font-weight: 600;
             padding: 1rem;
+            box-shadow:inset 0 5px 5px #00000033;
         }
 
         .modal-submit-btn {
@@ -51,7 +53,8 @@
             font-size: 24px;
             font-weight: 700;
             color: $alert-success;
-            background-color: $accent-dark;
+            background-color: $primary;
+            box-shadow: 2px 2px $alert-success, 4px 4px $alert-success;
         }
 
         .modal-cancel-btn {
@@ -61,7 +64,61 @@
             font-size: 24px;
             font-weight: 700;
             color: $alert-error;
-            background-color: $accent-dark;
+            background-color: $primary;
+            box-shadow: 2px 2px $alert-error, 4px 4px $alert-error;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .modal {
+        animation: bg-ani 2.5s ease infinite;
+    }
+}
+
+@keyframes bg-ani {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 400%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .modal-container {
+        overflow: hidden;
+        .modal {
+            width: 20rem;
+            height: 16rem;
+            box-shadow: 2px 2px $primary, 4px 4px $primary, 6px 6px $primary;
+            padding: 3rem !important;
+    
+            .modal-input {
+                width: 100%;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 0.75rem;
+            }
+    
+            .modal-submit-btn {
+                text-align: center;
+                margin: 0.5rem;
+                font-size: 15px;
+                font-weight: 800;
+                padding: 1.5rem !important;
+            }
+    
+            .modal-cancel-btn {
+                margin: 0.5rem;
+                font-size: 15px;
+                font-weight: 800;
+                padding: 1.5rem !important;
+            }
         }
     }
 }

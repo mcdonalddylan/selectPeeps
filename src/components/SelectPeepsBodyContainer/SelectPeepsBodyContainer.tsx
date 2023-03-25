@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import { DataListContainer } from '../DataListContainer/DataListContainer';
-import './SelectPeepsBodyContainer.scss';
 
 export const SelectPeepsBodyContainer = (): ReactElement => {
     

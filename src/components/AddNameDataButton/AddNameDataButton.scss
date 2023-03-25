@@ -10,7 +10,7 @@
     width: 3rem;
     padding: 0.5rem;
     border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     color: $accent-light;
     cursor: pointer;
 }
@@ -22,10 +22,9 @@
     font-size: 30px;
     font-weight: 900;
     background-color: $accent-dark;
-    transition: all 0.3s ease;
     
 }
 
 .add-name-btn-container:hover, .add-name-btn-container:active {
-    color: white;
+    color: $glow;
 }

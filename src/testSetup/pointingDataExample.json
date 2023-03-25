@@ -44,12 +44,12 @@
             {
                 "pointId": 12346,
                 "pointName":"Bob",
-                "pointValue": -1
+                "pointValue": 2
             },
             {
                 "pointId": 12347,
                 "pointName":"Will",
-                "pointValue": -1
+                "pointValue": 5
             },
             {
                 "pointId": 12348,

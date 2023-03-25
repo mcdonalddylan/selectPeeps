@@ -21,9 +21,12 @@ export type Translations<T extends string> = {
 export type TPageTranslationKeys = (
     'Site.Common.Submit' |
     'Site.Common.Cancel' |
+    'Site.Common.Date' |
     'Site.Techtro.Button' |
     'Site.Retro.Button' |
     'Site.Pointing.Button' |
+    'Site.Pointing.StoryName' |
+    'Site.Pointing.ChosenPoints' |
     'Site.Pointing.AvgPoints' |
     'Site.Language.Button' |
     'Site.Randomize.Button' |

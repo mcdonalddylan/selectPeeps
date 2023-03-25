@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { AddRemoveModal } from '../AddRemoveModal/AddRemoveModal';
 import './AddNameDataButton.scss';
@@ -13,6 +13,13 @@ export const AddNameDataButton = (): ReactElement => {
         }
     };
 
+    useEffect(() => {
+        if (showModal) {
+            const newNameInput = document.getElementsByName('newName');
+            newNameInput[0].focus();
+        }
+    }, [showModal]);
+
     return (
         <>
             <div className='p3 add-name-btn-container' onClick={handleAddingNewName}>
@@ -20,7 +27,7 @@ export const AddNameDataButton = (): ReactElement => {
                     +
                 </div>
             </div>
-            <AddRemoveModal isNameData={true} isVisible={showModal} closeModalFunction={() => setShowModal(false)} />
+            <AddRemoveModal isVisible={showModal} closeModalFunction={() => setShowModal(false)} />
         </>
     );
 };

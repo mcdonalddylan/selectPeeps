@@ -118,7 +118,7 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
         }
     };
 
-    const updateRetroMemberData = () => {
+    const updateRetroMemberData = (updatedRetrooData: any) => {
         // Update list of retro member data
     };
 

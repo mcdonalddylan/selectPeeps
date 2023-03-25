@@ -2,6 +2,7 @@
 
 .language-button-container {
     position: relative;
+    z-index: 100;
 
     .language-button {
         position: fixed;

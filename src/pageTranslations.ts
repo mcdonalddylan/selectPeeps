@@ -6,14 +6,21 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         hi: 'जमा करना',
         es: 'Entregar',
         cn: '提交',
-        al: '^*(*&**&&&^%:'
+        al: '^)&^%:'
     },
     'Site.Common.Cancel': {
         en: 'Cancel',
         hi: 'रद्द करना',
         es: 'Cancelar',
         cn: '取消',
-        al: '^*(*&**&&&^%:'
+        al: '&*&&^%:'
+    },
+    'Site.Common.Date': {
+        en: 'Date',
+        hi: 'तारीख',
+        es: 'Fecha',
+        cn: '日期',
+        al: '&*^'
     },
     'Site.Techtro.Button': {
         en: 'Techtro',
@@ -35,6 +42,20 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         es: 'Agregando puntos',
         cn: '加分',
         al: '*$%(^$%'
+    },
+    'Site.Pointing.StoryName': {
+        en: 'Story Name:',
+        hi: 'कहानी का नाम:',
+        es: 'Nombre de la historia:',
+        cn: '故事名称:',
+        al: '()()@#:'
+    },
+    'Site.Pointing.ChosenPoints': {
+        en: 'Chosen Points:',
+        hi: 'चुने हुए अंक:',
+        es: 'Puntos elegidos:',
+        cn: '选择点:',
+        al: '$%^#$%&:'
     },
     'Site.Pointing.AvgPoints': {
         en: 'Average Points',

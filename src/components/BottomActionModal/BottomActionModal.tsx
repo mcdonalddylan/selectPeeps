@@ -5,11 +5,9 @@ import './BottomActionModal.scss';
 
 export const BottomActionModal = (): ReactElement => {
     const { shouldShowBottomAction, setShouldShowBottomAction, currentLanguage, currentPage, isRandomizing, setIsRandomizing,
-        nameData, setNameData, updateRetroMemberData, updateTechtroMemberData } = usePageDataContext();
-    const [triggerRandomize, setTriggerRandomize] = useState<boolean>(false);
-    const firstUpdateCheck = useRef<number>(0);
+        nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, isLocalEnvironment } = usePageDataContext();
 
-    const RANDOMIZE_SPEED = 200;
+    const RANDOMIZE_SPEED = 150;
     let randomIntervalId : NodeJS.Timer;
 
     const randomizeTheSelectedPerson = () => {
@@ -20,8 +18,19 @@ export const BottomActionModal = (): ReactElement => {
             const originalSelectedMember = getSelectedMemberData();
             randomIntervalId = setInterval(() => {
                 const tempMember = getSelectedMemberData();
-                if (tempMember) {
+                const selectedMembersIndex = getSelectedMemberIndex();
+                if (tempMember && selectedMembersIndex !== -1) {
                     tempMember.isSelected = false;
+                    setNameData((prevNameData: any[]) => [
+                        ...prevNameData.slice(0, selectedMembersIndex),
+                        {
+                            id: prevNameData[selectedMembersIndex]?.id,
+                            name: prevNameData[selectedMembersIndex]?.name,
+                            team: prevNameData[selectedMembersIndex]?.team,
+                            isSelected: false
+                        },
+                        ...prevNameData.slice(selectedMembersIndex+1, nameData?.length)
+                    ]);
                     let randomIndexValue: number = 0;
                     while (true) {
                         randomIndexValue = Math.round(Math.random()*(nameData.length-1));
@@ -31,9 +40,17 @@ export const BottomActionModal = (): ReactElement => {
                     };
                     const updatedNameData: any[] = nameData;
                     if (updatedNameData) {
-                        console.log('UPDATED NAME DATA: ', updatedNameData);
                         updatedNameData[randomIndexValue].isSelected = true;
-                        setNameData(updatedNameData);
+                        setNameData((prevNameData: any[]) => [
+                            ...prevNameData.slice(0, randomIndexValue),
+                            {
+                                id: prevNameData[randomIndexValue]?.id,
+                                name: prevNameData[randomIndexValue]?.name,
+                                team: prevNameData[randomIndexValue]?.team,
+                                isSelected: true
+                            },
+                            ...prevNameData.slice(randomIndexValue+1, nameData?.length)
+                        ]);
                         loopCount--;
                         if (loopCount < 0 && originalSelectedMember?.id !== updatedNameData[randomIndexValue]?.id) {  // ends the interval once the looping number is over
                             clearInterval(randomIntervalId);
@@ -61,26 +78,26 @@ export const BottomActionModal = (): ReactElement => {
         };
     };
 
-    useEffect(() => {
-        firstUpdateCheck.current++;
-        if (firstUpdateCheck.current > 2) { // this ignores the couple times that this useEffect runs upon first loading the page
-            randomizeTheSelectedPerson();
-        } else {
-            return;
-        }
-        return () => window.clearInterval(randomIntervalId);
-    }, [triggerRandomize]);
-
     const selectTheNextPerson = () => {
         if (!isRandomizing) {
             const selectedMembersIndex = getSelectedMemberIndex();
             const updatedNameData: any[] = nameData;
             console.log('select mem index: ', selectedMembersIndex, ' | updatedNameData: ', updatedNameData);
-            if (updatedNameData) {
-                console.log('SHOULD SEE');
+            if (updatedNameData && updatedNameData.length > 1 && selectedMembersIndex !== -1) {
                 updatedNameData[selectedMembersIndex].isSelected = false;
                 updatedNameData[selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1].isSelected = true;
-                setNameData(updatedNameData);
+
+                // Updating name data without replcaing the whole object (to fix animation)
+                setNameData((prevNameData: any[]) => [
+                    ...prevNameData.slice(0, selectedMembersIndex),
+                    {
+                        id: prevNameData[selectedMembersIndex]?.id,
+                        name: prevNameData[selectedMembersIndex]?.name,
+                        team: prevNameData[selectedMembersIndex]?.team,
+                        isSelected: false
+                    },
+                    ...prevNameData.slice(selectedMembersIndex+1, nameData?.length)
+                ]);
                 if (currentPage === 'retro') {
                     updateRetroMemberData(updatedNameData);
                 } else if (currentPage === 'techtro') {
@@ -91,7 +108,9 @@ export const BottomActionModal = (): ReactElement => {
     };
 
     useEffect(() => {
-        console.log(nameData);
+        if (isLocalEnvironment){
+            console.log('name data:', nameData);
+        }
     }, [nameData]);
 
     const getSelectedMemberData = (): any => {
@@ -119,7 +138,7 @@ export const BottomActionModal = (): ReactElement => {
                             onClick={() => {
                                 // begin the randomization animation
                                 if (!isRandomizing) {
-                                    setTriggerRandomize(!triggerRandomize);
+                                    randomizeTheSelectedPerson();
                                     setShouldShowBottomAction(false);
                                 }
                             }}

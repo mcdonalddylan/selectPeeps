@@ -4,12 +4,11 @@ import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import './AddRemoveModal.scss';
 
 interface IAddRemoveModal {
-    isNameData: boolean;
     isVisible: boolean;
     closeModalFunction: Function;
 }
 
-export const AddRemoveModal = ({ isNameData, isVisible, closeModalFunction }: IAddRemoveModal): ReactElement => {
+export const AddRemoveModal = ({ isVisible, closeModalFunction }: IAddRemoveModal): ReactElement => {
     const { currentLanguage, selectedTeam, nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, currentPage } = usePageDataContext();
 
     const handleSubmittingNewName = (e: SyntheticEvent<HTMLFormElement>) => {

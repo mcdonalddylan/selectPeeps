@@ -1,0 +1,67 @@
+@import '../../colors.scss';
+
+.select-container-bg-dark {
+    z-index: -99;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 110vw;
+    height: 130vh;
+    background-color: $tertiary;
+    transition: all 0.3s;
+    pointer-events:none;
+    overflow: hidden;
+}
+
+.select-container-bg-light {
+    z-index: -99;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 110vw;
+    height: 130vh;
+    background-color: $accent-light;
+    transition: all 0.3s;
+    pointer-events:none;
+    overflow: hidden;
+}
+
+.bg-logo-container {
+    top: 0;
+    left: 0;
+    position: relative;
+}
+
+.bg-logo {
+    position: fixed;
+    top: 10rem;
+    left: 20%;
+    transform: translate(-25%, -25%);
+    width: 50rem;
+    pointer-events: none;
+    opacity: 0.05;
+    float: right;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .bg-logo {
+        animation: logo-spin-ani infinite 70s linear;
+    }
+}
+
+@keyframes logo-spin-ani {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .bg-logo {
+        width: 25rem;
+        left: 8%;
+    }
+}
