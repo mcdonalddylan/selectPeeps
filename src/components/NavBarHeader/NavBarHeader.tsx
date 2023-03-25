@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import './NavBarHeader.scss';
-import logo from '../../assets/logo.svg';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 
@@ -9,9 +8,6 @@ export const NavBarHeader = (): ReactElement => {
 
     return (
         <div className='nav-container'>
-            <div className='bg-logo-container'>
-                <img src={logo} className='bg-logo' alt='bg-logo' />
-            </div>
             <div className='nav-relative-container'>
                 <div className='nav-container-gradient'></div>
             </div>

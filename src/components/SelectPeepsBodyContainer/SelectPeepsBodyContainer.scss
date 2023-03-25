@@ -1,26 +1,19 @@
 @import '../../colors.scss';
 
 .select-container-bg-dark {
-    z-index: -11;
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(180deg, $tertiary, $primary);
+    background-color: $tertiary;
     position: relative;
     transition: all 0.3s;
+    pointer-events:none;
 }
 
 .select-container-bg-light {
-    z-index: -11;
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(180deg, $secondary, $accent-light);
+    background-color: $accent-light;
     position: relative;
     transition: all 0.3s;
-}
-
-.select-container-fg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    pointer-events:none;
 }

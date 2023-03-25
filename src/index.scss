@@ -1,0 +1,22 @@
+@import './colors.scss';
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $glow;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $accent;
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $accent-tint;
+}

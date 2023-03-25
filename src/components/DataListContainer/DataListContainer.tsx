@@ -1,11 +1,13 @@
 import { ReactElement, useEffect } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
+import { AddNameDataButton } from '../AddNameDataButton/AddNameDataButton';
 import { NameOnList } from '../NameOnList/NameOnList';
+import logo from '../../assets/logo.svg';
 import './DataListContainer.scss';
 
 export const DataListContainer = (): ReactElement => {
-    const { currentPage, selectedTeam, currentLanguage, getRetroMemberData, getTechtroMemberData,
+    const { currentPage, selectedTeam, currentLanguage, getRetroMemberData, getTechtroMemberData, isLightOn,
         getPointingData, isRandomizing, setIsRandomizing, pointData, setPointData, nameData, setNameData } = usePageDataContext();
 
     const sortDataByTeam = (dataList: any[]) => {
@@ -56,9 +58,10 @@ export const DataListContainer = (): ReactElement => {
                 <div className='d-flex flex-wrap'>
                     {nameData && nameData?.map((person: any, index: number) => {
                         return (
-                            <NameOnList key={index} name={person?.name} selected={person?.isSelected} />
+                            <NameOnList key={index} id={person?.id} name={person?.name} selected={person?.isSelected} />
                         )
                     })}
+                    {nameData && <AddNameDataButton />}
                 </div>
                 <div className='flex-row'>
                     {pointData ? (
@@ -123,6 +126,10 @@ export const DataListContainer = (): ReactElement => {
                         ) :
                         <></>
                     }
+                </div>
+                <div className={isLightOn ? 'select-container-bg-light' : 'select-container-bg-dark'}></div>
+                <div className='bg-logo-container'>
+                    <img src={logo} className='bg-logo' alt='bg-logo' />
                 </div>
             </>
         </div>

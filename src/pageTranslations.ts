@@ -1,6 +1,20 @@
 import { TPageTranslationKeys, Translations } from "./types/translationTypes";
 
 export const pageTranslations: Translations<TPageTranslationKeys> = {
+    'Site.Common.Submit': {
+        en: 'Submit',
+        hi: 'जमा करना',
+        es: 'Entregar',
+        cn: '提交',
+        al: '^*(*&**&&&^%:'
+    },
+    'Site.Common.Cancel': {
+        en: 'Cancel',
+        hi: 'रद्द करना',
+        es: 'Cancelar',
+        cn: '取消',
+        al: '^*(*&**&&&^%:'
+    },
     'Site.Techtro.Button': {
         en: 'Techtro',
         hi: 'डेवलपर मीटिंग',
@@ -17,16 +31,16 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
     },
     'Site.Pointing.Button': {
         en: 'Pointing',
-        hi: 'ओर इशारा करते हुए',
-        es: 'Puntuación',
-        cn: '计分会',
+        hi: 'अंक जोड़ना',
+        es: 'Agregando puntos',
+        cn: '加分',
         al: '*$%(^$%'
     },
     'Site.Pointing.AvgPoints': {
         en: 'Average Points',
-        hi: 'ओर इशारा',
-        es: 'Puntuación',
-        cn: '计分',
+        hi: 'औसत अंक',
+        es: 'Puntos promedio',
+        cn: '平均分',
         al: '&&@@#%'
     },
     'Site.Language.Button': {
@@ -66,9 +80,9 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
     },
     'Site.TeamSelect.Team': {
         en: 'Team',
-        hi: 'यहां',
-        es: 'Escriba',
-        cn: '在此',
+        hi: 'टीम',
+        es: 'Equipo',
+        cn: '团队',
         al: '#$'
     },
     'Site.TeamSelect.Get Support': {

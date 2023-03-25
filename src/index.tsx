@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'; // adding bootstrap to the project
 import { SelectPeepsWebAppContainer } from './components/SelectPeepsWebAppContainer';
 import reportWebVitals from './reportWebVitals';
 import { PageDataProvider } from './context/PageDataProvider/PageDataProvider';
-import './GoogleSheetsProvider.scss';
+import './index.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
