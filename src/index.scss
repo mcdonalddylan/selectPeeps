@@ -1,22 +1,24 @@
 @import './colors.scss';
 
-/* width */
-::-webkit-scrollbar {
-    width: 20px;
-}
+@media only screen and (min-width: 768px) {
+    /* width */
+    ::-webkit-scrollbar {
+        width: 20px;
+    }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: $secondary;
-}
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: $secondary;
+    }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: $accent;
-    border-radius: 20px;
-}
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $accent;
+        border-radius: 20px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: $accent-tint;
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: $accent-tint;
+    }
 }

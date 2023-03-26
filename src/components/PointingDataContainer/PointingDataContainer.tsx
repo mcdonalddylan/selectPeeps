@@ -4,14 +4,13 @@ import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import './PointingDataContainer.scss';
 
 interface IPointingDataContainerProps {
-    pointingDataList: any[];
     sortDataByTeam: Function;
     sortDataByDate: Function;
 };
 
-export const PointingDataContainer = ({ pointingDataList, sortDataByTeam, sortDataByDate } : IPointingDataContainerProps): ReactElement => {
-    const { currentLanguage, selectedTeam, getPointingData } = usePageDataContext();
-    const [selectedStoryData, setSelectedStoryData] = useState<any>(pointingDataList[0]);
+export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPointingDataContainerProps): ReactElement => {
+    const { currentLanguage, selectedTeam, getPointingData, pointData } = usePageDataContext();
+    const [selectedStoryData, setSelectedStoryData] = useState<any>(pointData[0]);
 
     const handleSelectingStory = (storyData: any) => {
         window.scrollTo(0,0);
@@ -25,7 +24,7 @@ export const PointingDataContainer = ({ pointingDataList, sortDataByTeam, sortDa
     }, [selectedTeam]);
 
     const calcAveragePoints = (): string | number => {
-        if (pointingDataList) {
+        if (pointData) {
             let runningTotal: number = 0;
             let numOfIterations = 0;
             for (const data of selectedStoryData?.members) {
@@ -81,7 +80,7 @@ export const PointingDataContainer = ({ pointingDataList, sortDataByTeam, sortDa
                             </h4>
                         </div>
                         <hr className='history-hr'></hr>
-                        {pointingDataList?.map((storyData: any, index: number) => {
+                        {pointData?.map((storyData: any, index: number) => {
                                 return (
                                     <div
                                         className={`d-flex align-items-center mb-3 ${storyData?.storyId === selectedStoryData?.storyId ? 'story-row-selected' : 'story-row-unselected'}`}

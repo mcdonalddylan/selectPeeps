@@ -98,6 +98,17 @@ export const BottomActionModal = (): ReactElement => {
                     },
                     ...prevNameData.slice(selectedMembersIndex+1, nameData?.length)
                 ]);
+                const nextNameIndex = selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1;
+                setNameData((prevNameData: any[]) => [
+                    ...prevNameData.slice(0, nextNameIndex),
+                    {
+                        id: prevNameData[nextNameIndex]?.id,
+                        name: prevNameData[nextNameIndex]?.name,
+                        team: prevNameData[nextNameIndex]?.team,
+                        isSelected: true
+                    },
+                    ...prevNameData.slice(nextNameIndex+1 > nameData?.length-1 ? nameData?.length : nextNameIndex+1, nameData?.length)
+                ]);
                 if (currentPage === 'retro') {
                     updateRetroMemberData(updatedNameData);
                 } else if (currentPage === 'techtro') {

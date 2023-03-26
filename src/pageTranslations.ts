@@ -71,6 +71,41 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         cn: '改变语言',
         al: '%^^^^^^%^'
     },
+    'Site.Login.Welcome' : {
+        en: 'Welcome:',
+        hi: 'स्वागत:',
+        es: 'Bienvenido:',
+        cn: '欢迎:',
+        al: '%^%$%$:'
+    },
+    'Site.Login.Button' : {
+        en: 'Login',
+        hi: 'लॉग इन करें',
+        es: 'Acceso',
+        cn: '登录',
+        al: ')()*%'
+    },
+    'Site.Login.Placeholder' : {
+        en: 'Type your username here',
+        hi: 'यहां अपना यूजरनेम टाइप करें',
+        es: 'Escriba su nombre de usuario aquí',
+        cn: '在这里输入您的用户名',
+        al: '!@##)$%)$^*)$#@$%$%$#^'
+    },
+    'Site.Login.Join' : {
+        en: 'Join',
+        hi: 'जोड़ना',
+        es: 'Unirse',
+        cn: '加入',
+        al: '*@#$'
+    },
+    'Site.Logout.Button' : {
+        en: 'Logout',
+        hi: 'लॉग आउट',
+        es: 'Cerrar sesión',
+        cn: '登出',
+        al: '^%#@^'
+    },
     'Site.Randomize.Button': {
         en: 'Randomize',
         hi: 'यादृच्छिक करें',

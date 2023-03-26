@@ -29,6 +29,11 @@ export type TPageTranslationKeys = (
     'Site.Pointing.ChosenPoints' |
     'Site.Pointing.AvgPoints' |
     'Site.Language.Button' |
+    'Site.Login.Welcome' |
+    'Site.Login.Button' |
+    'Site.Login.Placeholder' |
+    'Site.Login.Join' |
+    'Site.Logout.Button' |
     'Site.Randomize.Button' |
     'Site.NextPerson.Button' |
     'Site.AddNewPerson.Title' |

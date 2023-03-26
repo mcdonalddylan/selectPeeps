@@ -3,8 +3,8 @@ import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvi
 import { AddNameDataButton } from '../AddNameDataButton/AddNameDataButton';
 import { NameOnList } from '../NameOnList/NameOnList';
 import './DataListContainer.scss';
-import { PointingDataContainer } from '../PointingDataContainer/PointingDataContainer';
 import { BackgroundElements } from '../BackgroundElements/BackgroundElements';
+import { LoginContainer } from '../LoginContainer/LoginContainer';
 
 export const DataListContainer = (): ReactElement => {
     const { currentPage, selectedTeam, getRetroMemberData, getTechtroMemberData, getPointingData,
@@ -52,8 +52,7 @@ export const DataListContainer = (): ReactElement => {
                 </div>
                 <div className='flex-row'>
                     {pointData &&
-                        <PointingDataContainer
-                            pointingDataList={pointData}
+                        <LoginContainer
                             sortDataByTeam={sortDataByTeam}
                             sortDataByDate={sortDataByDate}
                         />

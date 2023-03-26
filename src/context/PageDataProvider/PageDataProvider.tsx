@@ -17,6 +17,8 @@ interface IPageDataProviderContext {
     selectedTeam: TAvailableTeams;
     setSelectedTeam: Function;
     setShouldShowBottomAction: Function;
+    loggedInUsername: string | null;
+    setLoggedInUsername: Function;
     shouldShowAddRemove: boolean;
     setShouldShowAddRemove: Function;
     currentLanguage: TSupportLanguages;
@@ -65,6 +67,7 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
     const [isRandomizing, setIsRandomizing] = useState<boolean>(false);
     const [nameData, setNameData] = useState<any[] | null>(null);
     const [pointData, setPointData] = useState<any[] | null>(null);
+    const [loggedInUsername, setLoggedInUsername] = useState<string | null>(localStorage.getItem('username'));
 
     useEffect(() => {
         if (isLocalEnvironment) {
@@ -160,6 +163,8 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
                 setSelectedTeam,
                 shouldShowAddRemove,
                 setShouldShowAddRemove,
+                loggedInUsername,
+                setLoggedInUsername,
                 currentLanguage,
                 changeCurrentLanguage,
                 isLoadingData,
