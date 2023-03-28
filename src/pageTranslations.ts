@@ -22,6 +22,13 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         cn: '日期',
         al: '&*^'
     },
+    'Site.Common.View': {
+        en: 'View',
+        hi: 'देखना',
+        es: 'Vista',
+        cn: '看法',
+        al: '*#%#'
+    },
     'Site.Techtro.Button': {
         en: 'Techtro',
         hi: 'डेवलपर मीटिंग',
@@ -132,6 +139,13 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         hi: 'यहां नए सदस्य का नाम टाइप करें',
         es: 'Escriba el nombre del nuevo miembro aquí',
         cn: '在此处输入新成员的姓名',
+        al: '#$%^*#@@$@@@@#@'
+    },
+    'Site.AddNewStory.Placeholder': {
+        en: 'Type new stories\' name here',
+        hi: 'नई कहानियों का नाम यहां टाइप करें',
+        es: 'Escriba el nombre de nuevas historias aquí',
+        cn: '在此处输入新故事名称',
         al: '#$%^*#@@$@@@@#@'
     },
     'Site.TeamSelect.Team': {

@@ -27,7 +27,7 @@ export const AddNameDataButton = (): ReactElement => {
                     +
                 </div>
             </div>
-            <AddRemoveModal isVisible={showModal} closeModalFunction={() => setShowModal(false)} />
+            <AddRemoveModal isAddingName isVisible={showModal} closeModalFunction={() => setShowModal(false)} />
         </>
     );
 };

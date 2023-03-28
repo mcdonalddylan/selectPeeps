@@ -26,15 +26,47 @@
         margin: 0;
     }
 
-    .pointer-row-container:nth-child(even) {
-        background-color: #0000000a;
-        border-radius: 20px;
-    }
+    .join-btn-container {
+        margin: 1rem auto 0;
+        padding: 1rem;
 
-    .pointer-name-row {
-        width: 50%;
-        text-align: center;
-        margin: auto;
+        .join-btn {
+            margin: 0 1rem;
+            padding: 1rem 2rem !important;
+            font-size: 20px;
+            border: 0;
+            border-radius: 20px;
+            background-color: $accent;
+            color: $accent-dark;
+            font-weight: 700;
+            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            transition: all 0.2s ease;
+        }
+
+        .join-btn:hover, .join-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn {
+            margin: 0 1rem;
+            padding: 1rem 2rem !important;
+            font-size: 20px;
+            border: 0;
+            border-radius: 20px;
+            background-color: $accent-med-light;
+            color: $accent-dark;
+            font-weight: 700;
+            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:hover, .view-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0;
+            transition: all 0.2s ease;
+        }
     }
 
     .chosen-point-container {
@@ -150,6 +182,33 @@
     }
 }
 
+.story-row-add-new {
+    margin: 0;
+    height: 2.5rem;
+    padding: 1rem 0.5rem !important;
+    border-radius: 10px;
+    background-color: $accent-dark;
+    box-shadow: 2px 2px 0 0 $accent-dark;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    p {
+        vertical-align: middle;
+        color: $accent-light;
+        margin: 0;
+        font-size: 30px;
+        font-weight: 800;
+    }
+}
+
+.story-row-add-new:hover, .story-row-add-new:active {
+    box-shadow: 2px 2px 0 0 $glow;
+
+    p {
+        color: $glow;
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
     .point-data-history-stretch {
@@ -165,10 +224,6 @@
     
             p {
                 font-size: 13px;
-            }
-    
-            .pointer-name-row {
-                width: 60%;
             }
     
             .chosen-point-container {

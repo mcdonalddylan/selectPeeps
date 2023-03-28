@@ -11,7 +11,7 @@ export const BottomActionModal = (): ReactElement => {
     let randomIntervalId : NodeJS.Timer;
 
     const randomizeTheSelectedPerson = () => {
-        if (!isRandomizing) {
+        if (!isRandomizing && nameData && nameData?.length > 1) {
             setIsRandomizing(true);
 
             let loopCount = Math.round((Math.random()*10) + 4);
@@ -79,7 +79,7 @@ export const BottomActionModal = (): ReactElement => {
     };
 
     const selectTheNextPerson = () => {
-        if (!isRandomizing) {
+        if (!isRandomizing && nameData && nameData?.length > 1) {
             const selectedMembersIndex = getSelectedMemberIndex();
             const updatedNameData: any[] = nameData;
             console.log('select mem index: ', selectedMembersIndex, ' | updatedNameData: ', updatedNameData);

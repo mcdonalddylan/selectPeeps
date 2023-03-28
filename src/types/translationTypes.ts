@@ -22,6 +22,7 @@ export type TPageTranslationKeys = (
     'Site.Common.Submit' |
     'Site.Common.Cancel' |
     'Site.Common.Date' |
+    'Site.Common.View' |
     'Site.Techtro.Button' |
     'Site.Retro.Button' |
     'Site.Pointing.Button' |
@@ -38,6 +39,7 @@ export type TPageTranslationKeys = (
     'Site.NextPerson.Button' |
     'Site.AddNewPerson.Title' |
     'Site.AddNewPerson.Placeholder' |
+    'Site.AddNewStory.Placeholder' |
     'Site.TeamSelect.Team' |
     'Site.TeamSelect.Get Support' |
     'Site.TeamSelect.CSR'
