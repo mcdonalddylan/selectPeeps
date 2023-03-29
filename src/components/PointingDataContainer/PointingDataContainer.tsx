@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from 'react';
+import { ReactElement, useState, useEffect, SyntheticEvent } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import { isUsernameInSelectedStory, calcAveragePoints } from '../../utils/pointingUtils/pointingUtils';
@@ -18,6 +18,8 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
     const [isLoggedInMemberInSelectedStory, setIsLoggedInMemberInSelectedStory] = useState<boolean>(isUsernameInSelectedStory(selectedStoryData, loggedInUsername));
     const [isViewingStory, setIsViewingStory] = useState<boolean>(false);
     const [viewAddModal, setViewAddModal] = useState<boolean>(false);
+    const [isRemoveButtonVisible, setIsRemoveButtonVisible] = useState<boolean>(false);
+    const [isEditingStoryName, setIsEditingStoryName] = useState<boolean>(false);
 
     const handleSelectingStory = (storyData: any) => {
         window.scrollTo(0,0);
@@ -34,6 +36,20 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
     useEffect(() => {
         setIsLoggedInMemberInSelectedStory(isUsernameInSelectedStory(selectedStoryData, loggedInUsername));
     }, [selectedStoryData]);
+
+    useEffect(() => {
+        if (viewAddModal) {
+            const newNameInput = document.getElementsByName('newName');
+            newNameInput[0].focus();
+        }
+    }, [viewAddModal]);
+
+    useEffect(() => {
+        if (isEditingStoryName) {
+            const newStoryNameInput = document.getElementsByName('newStoryName');
+            newStoryNameInput[0].focus();
+        }
+    }, [isEditingStoryName]);
 
     const handleJoiningAStory = () => {
         const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
@@ -91,15 +107,96 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
         }
     };
 
+    const handleStoryRemoval = (storyDataId: number) => {
+        if (!isEditingStoryName) {
+            const newStoryData = [
+                ...pointData?.filter((storyData: any) => storyData?.storyId !== storyDataId)
+            ];
+            setPointData(newStoryData);
+            setSelectedStoryData(newStoryData[0]);
+            updatePointingData(newStoryData);
+        }
+    };
+
+    const handleSubmitEditOfStoryName = (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const newStoryNameText: string = e.currentTarget['newStoryName'].value;
+        const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
+        if (selectedStoryIndex !== -1) {
+            setPointData((prevPointData: any[]) => [
+                ...prevPointData.slice(0, selectedStoryIndex),
+                {
+                    ...prevPointData[selectedStoryIndex],
+                    storyName: newStoryNameText
+                },
+                ...prevPointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ]);
+            const newStoryData = [
+                ...pointData.slice(0, selectedStoryIndex),
+                {
+                    ...pointData[selectedStoryIndex],
+                    storyName: newStoryNameText
+                },
+                ...pointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ];
+            setSelectedStoryData(newStoryData[selectedStoryIndex]);
+            updatePointingData(newStoryData);
+            setIsEditingStoryName(false);
+        }
+    };
+
     return (<>
-                <div className='point-data-container'>
+                <div
+                    className='point-data-container'
+                    onClick={() => {
+                        if (pointData.length > 1 && !isEditingStoryName && isLoggedInMemberInSelectedStory) {
+                            setIsRemoveButtonVisible(!isRemoveButtonVisible);
+                        }
+                    }}
+                    onMouseEnter={() => {
+                        if (pointData.length > 1 && !isEditingStoryName && isLoggedInMemberInSelectedStory) {
+                            setIsRemoveButtonVisible(true);
+                        }
+                    }}
+                    onMouseLeave={() => {
+                        if (pointData.length > 1) {
+                            setIsRemoveButtonVisible(false);
+                        }
+                    }}
+                >
+                    {isRemoveButtonVisible &&
+                        <div className='story-delete-container'>
+                            <button
+                                className='story-delete-btn'
+                                onClick={() => handleStoryRemoval(selectedStoryData?.storyId)}
+                            >
+                                X
+                            </button>
+                        </div>
+                    }
                     <div className='chosen-point-container'>
                         {selectedStoryData?.chosenPointValue === -1 ? '???' : selectedStoryData?.chosenPointValue}
                     </div>
                     <div className='average-points-container'>
                         {`${formatMessage('Site.Pointing.AvgPoints', currentLanguage)}: ${isLoggedInMemberInSelectedStory || isViewingStory ? calcAveragePoints(selectedStoryData): '???'}`}
                     </div>
-                    <h1>{selectedStoryData?.storyName}</h1>
+                    {isEditingStoryName ?
+                    <form onSubmit={handleSubmitEditOfStoryName} className='edit-name-container'>
+                        <input className='edit-text' type='text' defaultValue={selectedStoryData?.storyName} name='newStoryName'></input>
+                        <button className='edit-submit-btn' type='submit'>
+                            {formatMessage('Site.Common.Submit', currentLanguage)}
+                        </button>
+                        <button className='edit-cancel-btn' onClick={() => setIsEditingStoryName(false)}>
+                            {formatMessage('Site.Common.Cancel', currentLanguage)}
+                        </button>
+                    </form> :
+                    <h1 onClick={() => {
+                            if (isLoggedInMemberInSelectedStory || isViewingStory) {
+                                setIsEditingStoryName(true);
+                            }
+                        }}>
+                        {selectedStoryData?.storyName}
+                    </h1>}
                     <hr className='points-hr' ></hr>
                     {isLoggedInMemberInSelectedStory || isViewingStory ?
                         selectedStoryData?.members?.map((person: any, index: number) => {
@@ -125,7 +222,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                     }
                 </div>
                 <div className='point-data-history-stretch'>
-                    <div className='point-data-history-container'>
+                    <div className='point-data-history-container' >
                         <div className='d-flex align-items-center mb-3 story-header-container'>
                             <h4 className='p-1'>
                                 {`${formatMessage('Site.Common.Date', currentLanguage)}:`}
@@ -139,32 +236,36 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                         </div>
                         <hr className='history-hr'></hr>
                         <div
-                            className='d-flex mb-2 justify-content-center align-items-center story-row-add-new'
-                            onClick={() => setViewAddModal(true)}
+                            className='d-flex mb-3 justify-content-center align-items-center story-row-add-new'
+                            onClick={() => {
+                                if (!isEditingStoryName) {
+                                    setViewAddModal(true);
+                                } 
+                            }}
                         >
                             <p className='p-12'>
                                 +
                             </p>
                         </div>
-                        {viewAddModal && <AddRemoveModal isAddingStory isVisible={viewAddModal} closeModalFunction={() => setViewAddModal(false)} />}
+                        <AddRemoveModal isAddingStory isVisible={viewAddModal} closeModalFunction={() => setViewAddModal(false)} setSelectedStory={setSelectedStoryData} />
                         {pointData?.map((storyData: any, index: number) => {
-                                return (
-                                    <div
-                                        className={`d-flex align-items-center mb-2 ${storyData?.storyId === selectedStoryData?.storyId ? 'story-row-selected' : 'story-row-unselected'}`}
-                                        key={index}
-                                        onClick={() => handleSelectingStory(storyData)}
-                                    >
-                                        <p className='p-1'>
-                                            {new Date(storyData?.timeStamp).toLocaleDateString()}
-                                        </p>
-                                        <p className='p-5'>
-                                            {storyData?.storyName}
-                                        </p>
-                                        <p className='ms-auto p-2'>
-                                            {storyData?.chosenPointValue === -1 ? '???' : storyData?.chosenPointValue}
-                                        </p>
-                                    </div>
-                                )
+                            return (
+                                <div
+                                    className={`d-flex align-items-center mb-2 ${storyData?.storyId === selectedStoryData?.storyId ? 'story-row-selected' : 'story-row-unselected'}`}
+                                    key={index}
+                                    onClick={() => handleSelectingStory(storyData)}
+                                >
+                                    <p className='p-1'>
+                                        {new Date(storyData?.timeStamp).toLocaleDateString()}
+                                    </p>
+                                    <p className='p-5'>
+                                        {storyData?.storyName}
+                                    </p>
+                                    <p className='ms-auto p-2'>
+                                        {storyData?.chosenPointValue === -1 ? '???' : storyData?.chosenPointValue}
+                                    </p>
+                                </div>
+                            )
                         })}
                     </div>
                 </div>

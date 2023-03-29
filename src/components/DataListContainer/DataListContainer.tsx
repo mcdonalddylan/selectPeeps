@@ -2,9 +2,10 @@ import { ReactElement, useEffect } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
 import { AddNameDataButton } from '../AddNameDataButton/AddNameDataButton';
 import { NameOnList } from '../NameOnList/NameOnList';
-import './DataListContainer.scss';
 import { BackgroundElements } from '../BackgroundElements/BackgroundElements';
 import { LoginContainer } from '../LoginContainer/LoginContainer';
+import { sortDataByDate } from '../../utils/pointingUtils/pointingUtils';
+import './DataListContainer.scss';
 
 export const DataListContainer = (): ReactElement => {
     const { currentPage, selectedTeam, getRetroMemberData, getTechtroMemberData, getPointingData,
@@ -12,10 +13,6 @@ export const DataListContainer = (): ReactElement => {
 
     const sortDataByTeam = (dataList: any[]) => {
         return dataList?.filter((data) => data?.team === selectedTeam);
-    };
-
-    const sortDataByDate = (dataList: any[]) => {
-        return dataList?.sort((x, y) => new Date(x?.timeStamp).getTime() - new Date(y?.timeStamp).getTime());
     };
 
     useEffect(() => {

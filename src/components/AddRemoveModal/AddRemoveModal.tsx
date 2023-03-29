@@ -1,16 +1,18 @@
-import { ReactElement, SyntheticEvent } from 'react';
+import { ReactElement, SyntheticEvent, useEffect } from 'react';
 import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvider';
+import { sortDataByDate } from '../../utils/pointingUtils/pointingUtils';
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import './AddRemoveModal.scss';
 
 interface IAddRemoveModal {
     isVisible: boolean;
     closeModalFunction: Function;
+    setSelectedStory?: Function;
     isAddingName?: boolean;
     isAddingStory?: boolean;
 }
 
-export const AddRemoveModal = ({ isAddingName, isAddingStory, isVisible, closeModalFunction }: IAddRemoveModal): ReactElement => {
+export const AddRemoveModal = ({ isAddingName, isAddingStory, setSelectedStory, isVisible, closeModalFunction }: IAddRemoveModal): ReactElement => {
     const { currentLanguage, selectedTeam, nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, currentPage,
     pointData, setPointData, updatePointingData, loggedInUsername } = usePageDataContext();
 
@@ -40,10 +42,12 @@ export const AddRemoveModal = ({ isAddingName, isAddingStory, isVisible, closeMo
     const handleSubmittingNewStoryName = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newNameText: string = e.currentTarget['newName'].value;
-        const currentDateTimeInISOFormat: string = Date.now().toString();
-        if (newNameText.length > 0 && newNameText.length <= 30) {
-            const updatedPointData = [...pointData, {
-                storyId: Math.random()*9999999,
+        const currentDateTimeInISOFormat: string = new Date(Date.now()).toISOString();
+        console.log('new Date: ', currentDateTimeInISOFormat);
+        if (setSelectedStory && newNameText.length > 0 && newNameText.length <= 30) {
+            const randomStoryId = Math.random()*9999999;
+            let updatedPointData = [...pointData, {
+                storyId: randomStoryId,
                 team: selectedTeam,
                 storyName: newNameText,
                 timeStamp: currentDateTimeInISOFormat,
@@ -54,8 +58,11 @@ export const AddRemoveModal = ({ isAddingName, isAddingStory, isVisible, closeMo
                     pointValue: -1
                 }]
             }];
+            updatedPointData = sortDataByDate(updatedPointData);
             setPointData(updatedPointData);
+            setSelectedStory(updatedPointData?.filter((data: any) => data?.storyId === randomStoryId)[0]);
             updatePointingData(updatePointingData);
+            window.scrollTo(0,0);
 
             closeModalFunction();
         } else {
@@ -71,7 +78,17 @@ export const AddRemoveModal = ({ isAddingName, isAddingStory, isVisible, closeMo
         } else {
             return '???';
         }
-    }
+    };
+
+    useEffect(() => {
+        if (isVisible) {
+            document.body.style.position = 'sticky';
+            document.body.style.overflowY = 'hidden';
+        } else {
+            document.body.style.position = '';
+            document.body.style.overflowY = '';
+        }
+    }, [isVisible]);
 
     return (
         <>

@@ -2,6 +2,29 @@
 
 .pointer-row-container {
     position: relative;
+
+    .pointer-name-row {
+        width: 50%;
+        text-align: center;
+        margin: auto;
+    }
+    
+    .story-name-delete-btn {
+        z-index: 20;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 1.5rem;
+        font-size: 17px;
+        font-family: cursive;
+        color: $primary;
+        border: 0;
+        background-color: #00000000;
+        font-weight: 800;
+        text-align: center;
+        cursor: pointer;
+    }
 }
 
 .pointer-row-container:nth-child(even) {
@@ -9,32 +32,11 @@
     border-radius: 20px;
 }
 
-.pointer-name-row {
-    width: 50%;
-    text-align: center;
-    margin: auto;
-}
-
-.story-name-delete-btn {
-    z-index: 20;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2rem;
-    height: 1.5rem;
-    font-size: 17px;
-    font-family: cursive;
-    color: $primary;
-    border: 0;
-    background-color: #00000000;
-    font-weight: 800;
-    text-align: center;
-    cursor: pointer;
-}
-
 @media only screen and (max-width: 768px) {
 
-    .pointer-name-row {
-        width: 60%;
+    .pointer-row-container {
+        .pointer-name-row {
+            width: 60%;
+        }
     }
 }

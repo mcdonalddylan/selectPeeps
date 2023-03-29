@@ -1,20 +1,19 @@
 @import '../../colors.scss';
 
 .modal-container {
-
     .modal-bg {
-        position: absolute;
+        position: fixed;
         top: -1rem;
         left: -1rem;
         width: 110vw;
-        height: 100vh;
+        height: 130vh;
         z-index: 9998;
         background-color: #000000aa;
         overflow: hidden !important;
     }
 
     .modal {
-        position: absolute;
+        position: fixed;
         display: inline-block;
         top: 50%;
         left: 50%;
@@ -92,6 +91,7 @@
 
     .modal-container {
         overflow: hidden;
+        
         .modal {
             width: 20rem;
             height: 16rem;

@@ -1,6 +1,5 @@
 export const isUsernameInSelectedStory = (selectedStoryData: any, loggedInUsername: string | null): boolean => {
     for (const member of selectedStoryData?.members) {
-        console.log('mem: ', member?.pointName, ' | usr: ', loggedInUsername);
         if(member?.pointName === loggedInUsername) {
             return true;
         }
@@ -21,4 +20,10 @@ export const calcAveragePoints = (selectedStoryData: any): string | number => {
         return (runningTotal / numOfIterations).toFixed(1);
     }
     return '???';
+};
+
+export const sortDataByDate = (dataList: any[]) => {
+    return dataList?.sort((x, y) => {
+        return new Date(y?.timeStamp).getTime() - new Date(x?.timeStamp).getTime();
+    });
 };

@@ -2,7 +2,7 @@
 
 .select-container-bg-dark {
     z-index: -99;
-    position: absolute !important;
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 110vw;
@@ -15,11 +15,11 @@
 
 .select-container-bg-light {
     z-index: -99;
-    position: absolute !important;
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 110vw;
-    height: 130vh;
+    height: 100vh;
     background-color: $accent-light;
     transition: all 0.3s;
     pointer-events:none;
@@ -34,6 +34,7 @@
 
 .bg-logo {
     position: fixed;
+    z-index: -90;
     top: 10rem;
     left: 20%;
     transform: translate(-25%, -25%);
