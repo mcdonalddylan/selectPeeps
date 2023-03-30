@@ -11,4 +11,9 @@ $secondary-med-light: #ffcc9d;
 
 $alert-success: #66dfaa;
 $alert-warning: #efef88;
-$alert-error: #ef6677
+$alert-error: #ef6677;
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("./assets/Montserrat-Regular.ttf");
+}

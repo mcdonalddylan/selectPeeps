@@ -19,7 +19,7 @@
             width: 2rem;
             height: 1.5rem;
             font-size: 20px;
-            font-family: cursive;
+            font-family: 'Montserrat';
             color: $primary;
             border: 0;
             background-color: #00000000;
@@ -91,6 +91,61 @@
         }
     }
 
+    .edit-point-container {
+        position: relative;
+        padding: 0 !important;
+        text-align: left;
+        color: $accent-dark;
+        font-size: 20px;
+        font-weight: 700;
+
+        .edit-number {
+            padding: 0.5rem !important;
+            border: 0;
+            border-radius: 20px;
+            box-shadow: inset 0 20px 20px #00000022;
+            background-color: $accent;
+        }
+
+        .edit-point-submit-btn {
+            margin: 0.25rem;
+            padding: 0.5rem 1rem !important;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            background-color: $alert-success;
+            color: $accent-dark;
+            font-weight: 700;
+            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            transition: all 0.2s ease;
+        }
+
+        .edit-point-submit-btn:hover, .edit-point-submit-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0;
+            transition: all 0.2s ease;
+        }
+
+        .edit-point-cancel-btn {
+            margin: 0.25rem;
+            padding: 0.5rem 1rem !important;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            background-color: $alert-error;
+            color: $accent-dark;
+            font-weight: 700;
+            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            transition: all 0.2s ease;
+        }
+
+        .edit-point-cancel-btn:hover, .edit-point-cancel-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0;
+            transition: all 0.2s ease;
+        }
+    }
+
     p {
         text-align: center;
         font-size: 20px;
@@ -146,12 +201,12 @@
         position: absolute;
         top: -1rem;
         right: -1rem;
-        font-size: 30px;
+        font-size: 50px;
         font-weight: 700;
         border: 3px solid white;
         background-color: $accent;
         border-radius: 50%;
-        padding: 0.5rem 1.5rem;
+        padding: 1rem 1.5rem;
     }
     
     .average-points-container {
@@ -292,19 +347,11 @@
 
         .story-delete-container {
             .story-delete-btn {
-                position: absolute;
                 top: 1rem;
                 left: 0.5rem;
                 width: 2rem;
                 height: 1.5rem;
                 font-size: 17px;
-                font-family: cursive;
-                color: $primary;
-                border: 0;
-                background-color: #00000000;
-                font-weight: 800;
-                text-align: center;
-                cursor: pointer;
             }
         }
 
@@ -315,14 +362,16 @@
         }
 
         .edit-name-container {
-            padding: 1.5rem 2rem 0 0;
+            padding: 1.5rem 0 0 0;
             text-align: center;
+            margin: auto !important;
             font-size: 18px;
     
             .edit-text {
                 padding: 0rem 0.5rem;
                 border-radius: 10px;
                 box-shadow: inset 0 6px 5px #00000022;
+                margin-bottom: 0.5rem;
             }
     
             .edit-submit-btn {
@@ -336,6 +385,30 @@
                 padding: 0.5rem 1rem !important;
                 font-size: 16px;
                 border-radius: 10px;
+            }
+        }
+
+        .edit-point-container {
+            padding: 1rem !important;
+            text-align: center;
+            font-size: 15px;
+    
+            .edit-number {
+                display: block;
+                margin: auto;
+                padding: 0.5rem !important;
+            }
+    
+            .edit-point-submit-btn {
+                margin: 0.25rem;
+                padding: 0.5rem !important;
+                font-size: 12px;
+            }
+    
+            .edit-point-cancel-btn {
+                margin: 0.25rem;
+                padding: 0.5rem !important;
+                font-size: 12px;
             }
         }
 

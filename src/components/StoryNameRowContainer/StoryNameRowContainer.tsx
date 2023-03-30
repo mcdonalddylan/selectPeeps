@@ -7,9 +7,10 @@ interface IStoryNameRowContainerProps {
     index: number;
     removePersonFunction: Function;
     isViewingStory: boolean;
+    loggedInUsername: string | null;
 }
 
-export const StoryNameRowContainer = ({ allMemberData, personData, index, removePersonFunction, isViewingStory }: IStoryNameRowContainerProps ): ReactElement => {
+export const StoryNameRowContainer = ({ allMemberData, personData, index, removePersonFunction, isViewingStory, loggedInUsername }: IStoryNameRowContainerProps ): ReactElement => {
     const [isRemoveVisible, setIsRemoveVisible] = useState<boolean>(false);
     
     return (
@@ -31,8 +32,8 @@ export const StoryNameRowContainer = ({ allMemberData, personData, index, remove
                 }
             }}
         >
-            <div className='d-flex justify-content-center align-items-center pointer-name-row'>
-                <p className='p-1'>
+            <div className={`d-flex justify-content-center align-items-center pointer-name-row ${personData?.pointName === loggedInUsername && 'select-name-row'}`}>
+                <p className='p-1 pointer-number'>
                     {index+1}
                 </p>
                 <p className='p-3'>

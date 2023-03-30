@@ -7,6 +7,10 @@
         width: 50%;
         text-align: center;
         margin: auto;
+
+        .pointer-number {
+            font-size: 14px;
+        }
     }
     
     .story-name-delete-btn {
@@ -17,7 +21,7 @@
         width: 2rem;
         height: 1.5rem;
         font-size: 17px;
-        font-family: cursive;
+        font-family: 'Montserrat';
         color: $primary;
         border: 0;
         background-color: #00000000;
@@ -30,6 +34,10 @@
 .pointer-row-container:nth-child(even) {
     background-color: #0000000a;
     border-radius: 20px;
+}
+
+.select-name-row {
+    font-weight: 700;
 }
 
 @media only screen and (max-width: 768px) {

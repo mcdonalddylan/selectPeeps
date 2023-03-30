@@ -4,11 +4,19 @@ import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import './BottomActionModal.scss';
 
 export const BottomActionModal = (): ReactElement => {
-    const { shouldShowBottomAction, setShouldShowBottomAction, currentLanguage, currentPage, isRandomizing, setIsRandomizing,
-        nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, isLocalEnvironment } = usePageDataContext();
+    const { currentLanguage, currentPage, isRandomizing, setIsRandomizing,
+        nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, isLocalEnvironment, loggedInUsername,
+        isLoggedInMemberInSelectedStory } = usePageDataContext();
 
     const RANDOMIZE_SPEED = 150;
     let randomIntervalId : NodeJS.Timer;
+
+    
+    useEffect(() => {
+        if (isLocalEnvironment){
+            console.log('name data:', nameData);
+        }
+    }, [nameData]);
 
     const randomizeTheSelectedPerson = () => {
         if (!isRandomizing && nameData && nameData?.length > 1) {
@@ -87,6 +95,7 @@ export const BottomActionModal = (): ReactElement => {
                 updatedNameData[selectedMembersIndex].isSelected = false;
                 updatedNameData[selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1].isSelected = true;
 
+                const nextNameIndex = selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1; // TODO: Need to fix this logic
                 // Updating name data without replcaing the whole object (to fix animation)
                 setNameData((prevNameData: any[]) => [
                     ...prevNameData.slice(0, selectedMembersIndex),
@@ -96,11 +105,6 @@ export const BottomActionModal = (): ReactElement => {
                         team: prevNameData[selectedMembersIndex]?.team,
                         isSelected: false
                     },
-                    ...prevNameData.slice(selectedMembersIndex+1, nameData?.length)
-                ]);
-                const nextNameIndex = selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1;
-                setNameData((prevNameData: any[]) => [
-                    ...prevNameData.slice(0, nextNameIndex),
                     {
                         id: prevNameData[nextNameIndex]?.id,
                         name: prevNameData[nextNameIndex]?.name,
@@ -118,12 +122,6 @@ export const BottomActionModal = (): ReactElement => {
         }
     };
 
-    useEffect(() => {
-        if (isLocalEnvironment){
-            console.log('name data:', nameData);
-        }
-    }, [nameData]);
-
     const getSelectedMemberData = (): any => {
         let singleNameDataMember = [];
         singleNameDataMember = nameData?.filter((data: any) => data?.isSelected === true);
@@ -138,9 +136,13 @@ export const BottomActionModal = (): ReactElement => {
         return nameData?.findIndex((data: any) => data?.isSelected === true);
     };
 
+    const updateLoggedInMembersPointValue = (pointUpdateValue: number) => {
+        //TODO: Update logged in member's point value based on value passed in
+    };
+
     return (
         <div className='bottom-action-container'>
-            <div className={`d-flex ${shouldShowBottomAction ? 'bottom-action-enter' : 'bottom-action-exit'}`}>
+            <div className={`d-flex ${(currentPage === 'retro' || currentPage === 'techtro') || isLoggedInMemberInSelectedStory ? 'bottom-action-enter' : 'bottom-action-exit'}`}>
                 {currentPage === 'retro' || currentPage === 'techtro' ?
                 <>
                     <div className='p-4'>
@@ -150,7 +152,6 @@ export const BottomActionModal = (): ReactElement => {
                                 // begin the randomization animation
                                 if (!isRandomizing) {
                                     randomizeTheSelectedPerson();
-                                    setShouldShowBottomAction(false);
                                 }
                             }}
                         >
@@ -170,68 +171,61 @@ export const BottomActionModal = (): ReactElement => {
                     </div>
                 </> :
                 <>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // begin the randomization animation
-                                randomizeTheSelectedPerson();
-                                setShouldShowBottomAction(false);
+                                updateLoggedInMembersPointValue(0);
                             }}
                         >
                             0
                         </button>
                     </div>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // select the next person on the list
-                                selectTheNextPerson();
+                                updateLoggedInMembersPointValue(1);
                             }}
                         >
                             1
                         </button>
                     </div>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // begin the randomization animation
-                                setShouldShowBottomAction(false);
+                                updateLoggedInMembersPointValue(2);
                             }}
                         >
                             2
                         </button>
                     </div>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // select the next person on the list
-                                selectTheNextPerson();
+                                updateLoggedInMembersPointValue(3);
                             }}
                         >
                             3
                         </button>
                     </div>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // select the next person on the list
-                                selectTheNextPerson();
+                                updateLoggedInMembersPointValue(5);
                             }}
                         >
                             5
                         </button>
                     </div>
-                    <div className='p-1'>
+                    <div className='p-1 point-btn'>
                         <button
                             className='bottom-button'
                             onClick={() => {
-                                // select the next person on the list
-                                selectTheNextPerson();
+                                updateLoggedInMembersPointValue(8);
                             }}
                         >
                             8+

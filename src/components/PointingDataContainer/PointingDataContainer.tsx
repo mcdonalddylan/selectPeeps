@@ -13,13 +13,14 @@ interface IPointingDataContainerProps {
 
 export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPointingDataContainerProps): ReactElement => {
     const { currentLanguage, selectedTeam, getPointingData, pointData, setPointData, updatePointingData, 
-        loggedInUsername } = usePageDataContext();
-    const [selectedStoryData, setSelectedStoryData] = useState<any>(pointData[0]);
-    const [isLoggedInMemberInSelectedStory, setIsLoggedInMemberInSelectedStory] = useState<boolean>(isUsernameInSelectedStory(selectedStoryData, loggedInUsername));
+        loggedInUsername, selectedStoryData, setSelectedStoryData, isLoggedInMemberInSelectedStory, 
+        setIsLoggedInMemberInSelectedStory } = usePageDataContext();
     const [isViewingStory, setIsViewingStory] = useState<boolean>(false);
     const [viewAddModal, setViewAddModal] = useState<boolean>(false);
     const [isRemoveButtonVisible, setIsRemoveButtonVisible] = useState<boolean>(false);
     const [isEditingStoryName, setIsEditingStoryName] = useState<boolean>(false);
+    const [isEditingPointTotal, setIsEditingPointTotal] = useState<boolean>(false);
+    
 
     const handleSelectingStory = (storyData: any) => {
         window.scrollTo(0,0);
@@ -50,6 +51,13 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
             newStoryNameInput[0].focus();
         }
     }, [isEditingStoryName]);
+
+    useEffect(() => {
+        if (isEditingPointTotal) {
+            const newPointTotalInput = document.getElementsByName('newPointTotal');
+            newPointTotalInput[0].focus();
+        }
+    }, [isEditingPointTotal]);
 
     const handleJoiningAStory = () => {
         const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
@@ -145,6 +153,33 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
         }
     };
 
+    const handleSubmitEditOfPointTotal = (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const newPointTotalText: string = e.currentTarget['newPointTotal'].value;
+        const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
+        if (selectedStoryIndex !== -1) {
+            setPointData((prevPointData: any[]) => [
+                ...prevPointData.slice(0, selectedStoryIndex),
+                {
+                    ...prevPointData[selectedStoryIndex],
+                    chosenPointValue: newPointTotalText
+                },
+                ...prevPointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ]);
+            const newStoryData = [
+                ...pointData.slice(0, selectedStoryIndex),
+                {
+                    ...pointData[selectedStoryIndex],
+                    chosenPointValue: newPointTotalText
+                },
+                ...pointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ];
+            setSelectedStoryData(newStoryData[selectedStoryIndex]);
+            updatePointingData(newStoryData);
+            setIsEditingPointTotal(false);
+        }
+    };
+
     return (<>
                 <div
                     className='point-data-container'
@@ -174,29 +209,54 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                             </button>
                         </div>
                     }
-                    <div className='chosen-point-container'>
-                        {selectedStoryData?.chosenPointValue === -1 ? '???' : selectedStoryData?.chosenPointValue}
+                    <div className='chosen-point-container' onClick={() => {
+                            if (isLoggedInMemberInSelectedStory || isViewingStory) {
+                                setIsEditingPointTotal(true);
+                            }
+                        }}
+                    >
+                        {isEditingPointTotal ?
+                            <form onSubmit={handleSubmitEditOfPointTotal} className='edit-point-container'>
+                                <input
+                                    className='edit-number'
+                                    type='number'
+                                    min='0'
+                                    max='9'
+                                    defaultValue={selectedStoryData?.chosenPointValue === -1 ? 0 : selectedStoryData?.chosenPointValue}
+                                    name='newPointTotal'
+                                ></input>
+                                <button className='edit-point-submit-btn' type='submit'>
+                                    {formatMessage('Site.Common.Submit', currentLanguage)}
+                                </button>
+                                <button className='edit-point-cancel-btn' onClick={() => setIsEditingPointTotal(false)}>
+                                    {formatMessage('Site.Common.Cancel', currentLanguage)}
+                                </button>
+                            </form> :
+                            <p>
+                                {selectedStoryData?.chosenPointValue === -1 ? '???' : selectedStoryData?.chosenPointValue}
+                            </p>}
                     </div>
                     <div className='average-points-container'>
                         {`${formatMessage('Site.Pointing.AvgPoints', currentLanguage)}: ${isLoggedInMemberInSelectedStory || isViewingStory ? calcAveragePoints(selectedStoryData): '???'}`}
                     </div>
                     {isEditingStoryName ?
-                    <form onSubmit={handleSubmitEditOfStoryName} className='edit-name-container'>
-                        <input className='edit-text' type='text' defaultValue={selectedStoryData?.storyName} name='newStoryName'></input>
-                        <button className='edit-submit-btn' type='submit'>
-                            {formatMessage('Site.Common.Submit', currentLanguage)}
-                        </button>
-                        <button className='edit-cancel-btn' onClick={() => setIsEditingStoryName(false)}>
-                            {formatMessage('Site.Common.Cancel', currentLanguage)}
-                        </button>
-                    </form> :
-                    <h1 onClick={() => {
-                            if (isLoggedInMemberInSelectedStory || isViewingStory) {
-                                setIsEditingStoryName(true);
-                            }
-                        }}>
-                        {selectedStoryData?.storyName}
-                    </h1>}
+                        <form onSubmit={handleSubmitEditOfStoryName} className='edit-name-container'>
+                            <input className='edit-text' type='text' defaultValue={selectedStoryData?.storyName} name='newStoryName'></input>
+                            <button className='edit-submit-btn' type='submit'>
+                                {formatMessage('Site.Common.Submit', currentLanguage)}
+                            </button>
+                            <button className='edit-cancel-btn' onClick={() => setIsEditingStoryName(false)}>
+                                {formatMessage('Site.Common.Cancel', currentLanguage)}
+                            </button>
+                        </form> :
+                        <h1 onClick={() => {
+                                if (isLoggedInMemberInSelectedStory || isViewingStory) {
+                                    setIsEditingStoryName(true);
+                                }
+                            }}
+                        >
+                            {selectedStoryData?.storyName}
+                        </h1>}
                     <hr className='points-hr' ></hr>
                     {isLoggedInMemberInSelectedStory || isViewingStory ?
                         selectedStoryData?.members?.map((person: any, index: number) => {
@@ -208,6 +268,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                                     index={index}
                                     isViewingStory={isViewingStory}
                                     removePersonFunction={handleStoryMemberRemoval}
+                                    loggedInUsername={loggedInUsername}
                                 />
                             )
                         }) :

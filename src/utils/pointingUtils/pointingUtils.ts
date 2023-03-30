@@ -1,7 +1,9 @@
 export const isUsernameInSelectedStory = (selectedStoryData: any, loggedInUsername: string | null): boolean => {
-    for (const member of selectedStoryData?.members) {
-        if(member?.pointName === loggedInUsername) {
-            return true;
+    if (selectedStoryData?.members) {
+        for (const member of selectedStoryData?.members) {
+            if(member?.pointName === loggedInUsername) {
+                return true;
+            }
         }
     }
     return false;

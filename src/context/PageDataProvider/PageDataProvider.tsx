@@ -6,6 +6,7 @@ import { TAvailablePages, TAvailableTeams } from '../../types/pageTypes';
 import localRetroMemberData from '../../testSetup/retroMemberDataExample.json';
 import localTechtroMemberData from '../../testSetup/techtroMemberDataExample.json';
 import localPointingData from '../../testSetup/pointingDataExample.json';
+import { isUsernameInSelectedStory } from '../../utils/pointingUtils/pointingUtils';
 
 interface IPageDataProviderContext {
     currentPage: TAvailablePages;
@@ -39,6 +40,10 @@ interface IPageDataProviderContext {
     setNameData: Function;
     pointData: any | null;
     setPointData: Function;
+    selectedStoryData: any;
+    setSelectedStoryData: Function;
+    isLoggedInMemberInSelectedStory: boolean;
+    setIsLoggedInMemberInSelectedStory: Function;
 }
 
 interface IPageDataProviderProps {
@@ -67,7 +72,10 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
     const [isRandomizing, setIsRandomizing] = useState<boolean>(false);
     const [nameData, setNameData] = useState<any[] | null>(null);
     const [pointData, setPointData] = useState<any[] | null>(null);
+    const [selectedStoryData, setSelectedStoryData] = useState<any>(pointData ? pointData[0]: {});
     const [loggedInUsername, setLoggedInUsername] = useState<string | null>(localStorage.getItem('username'));
+    const [isLoggedInMemberInSelectedStory, setIsLoggedInMemberInSelectedStory] = useState<boolean>(isUsernameInSelectedStory(selectedStoryData, loggedInUsername));
+
 
     useEffect(() => {
         if (isLocalEnvironment) {
@@ -182,7 +190,11 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
                 nameData,
                 setNameData,
                 pointData,
-                setPointData
+                setPointData,
+                selectedStoryData,
+                setSelectedStoryData,
+                isLoggedInMemberInSelectedStory, 
+                setIsLoggedInMemberInSelectedStory
             }}
         >
             {children}
