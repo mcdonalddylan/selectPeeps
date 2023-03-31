@@ -10,7 +10,8 @@ interface ILoginContainerProps {
 };
 
 export const LoginContainer = ({ sortDataByTeam, sortDataByDate }: ILoginContainerProps): ReactElement => {
-    const { currentLanguage, currentPage, loggedInUsername, setLoggedInUsername } = usePageDataContext();
+    const { currentLanguage, currentPage, loggedInUsername, setLoggedInUsername, hasRevealedPoints,
+        setHasRevealedPoints } = usePageDataContext();
 
     const handleLoginSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -25,6 +26,9 @@ export const LoginContainer = ({ sortDataByTeam, sortDataByDate }: ILoginContain
     const handleLogout = () => {
         setLoggedInUsername(null);
         localStorage.removeItem('username');
+        if (hasRevealedPoints) {
+            setHasRevealedPoints(false);
+        }
     };
 
     useEffect(() => {

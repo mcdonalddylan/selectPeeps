@@ -14,19 +14,11 @@ interface IPointingDataContainerProps {
 export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPointingDataContainerProps): ReactElement => {
     const { currentLanguage, selectedTeam, getPointingData, pointData, setPointData, updatePointingData, 
         loggedInUsername, selectedStoryData, setSelectedStoryData, isLoggedInMemberInSelectedStory, 
-        setIsLoggedInMemberInSelectedStory } = usePageDataContext();
-    const [isViewingStory, setIsViewingStory] = useState<boolean>(false);
+        setIsLoggedInMemberInSelectedStory, hasRevealedPoints, setHasRevealedPoints } = usePageDataContext();
     const [viewAddModal, setViewAddModal] = useState<boolean>(false);
-    const [isRemoveButtonVisible, setIsRemoveButtonVisible] = useState<boolean>(false);
+    const [isRemoveButtonVisible, setIsRemoveButtonVisible] = useState<boolean>(true);
     const [isEditingStoryName, setIsEditingStoryName] = useState<boolean>(false);
     const [isEditingPointTotal, setIsEditingPointTotal] = useState<boolean>(false);
-    
-
-    const handleSelectingStory = (storyData: any) => {
-        window.scrollTo(0,0);
-        setIsViewingStory(false);
-        setSelectedStoryData(storyData);
-    };
 
     useEffect(() => {
         let tempPointingData = sortDataByTeam(getPointingData());
@@ -58,6 +50,22 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
             newPointTotalInput[0].focus();
         }
     }, [isEditingPointTotal]);
+
+    useEffect(() => {
+        if (pointData?.length < 2 && isRemoveButtonVisible) {
+            setIsRemoveButtonVisible(false);
+        } else if (pointData?.length > 1 && !isRemoveButtonVisible) {
+            setIsRemoveButtonVisible(true);
+        }
+    }, [pointData]);
+
+    const handleSelectingStory = (storyData: any) => {
+        window.scrollTo(0,0);
+        if (hasRevealedPoints) {
+            setHasRevealedPoints(false);
+        }
+        setSelectedStoryData(storyData);
+    };
 
     const handleJoiningAStory = () => {
         const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
@@ -110,6 +118,9 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                 ...pointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
             ];
             setPointData(newStoryData);
+            if (pointData[selectedStoryIndex]?.members?.filter((member: any) => member?.pointId === pointMemberId)[0]?.pointName === loggedInUsername) {
+                setHasRevealedPoints(false);
+            }
             setSelectedStoryData(newStoryData[selectedStoryIndex]);
             updatePointingData(newStoryData);
         }
@@ -121,6 +132,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                 ...pointData?.filter((storyData: any) => storyData?.storyId !== storyDataId)
             ];
             setPointData(newStoryData);
+            setHasRevealedPoints(false);
             setSelectedStoryData(newStoryData[0]);
             updatePointingData(newStoryData);
         }
@@ -181,24 +193,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
     };
 
     return (<>
-                <div
-                    className='point-data-container'
-                    onClick={() => {
-                        if (pointData.length > 1 && !isEditingStoryName && isLoggedInMemberInSelectedStory) {
-                            setIsRemoveButtonVisible(!isRemoveButtonVisible);
-                        }
-                    }}
-                    onMouseEnter={() => {
-                        if (pointData.length > 1 && !isEditingStoryName && isLoggedInMemberInSelectedStory) {
-                            setIsRemoveButtonVisible(true);
-                        }
-                    }}
-                    onMouseLeave={() => {
-                        if (pointData.length > 1) {
-                            setIsRemoveButtonVisible(false);
-                        }
-                    }}
-                >
+                <div className='point-data-container' >
                     {isRemoveButtonVisible &&
                         <div className='story-delete-container'>
                             <button
@@ -210,7 +205,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                         </div>
                     }
                     <div className='chosen-point-container' onClick={() => {
-                            if (isLoggedInMemberInSelectedStory || isViewingStory) {
+                            if (isLoggedInMemberInSelectedStory) {
                                 setIsEditingPointTotal(true);
                             }
                         }}
@@ -237,7 +232,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                             </p>}
                     </div>
                     <div className='average-points-container'>
-                        {`${formatMessage('Site.Pointing.AvgPoints', currentLanguage)}: ${isLoggedInMemberInSelectedStory || isViewingStory ? calcAveragePoints(selectedStoryData): '???'}`}
+                        {`${formatMessage('Site.Pointing.AvgPoints', currentLanguage)}: ${isLoggedInMemberInSelectedStory && hasRevealedPoints ? calcAveragePoints(selectedStoryData): '???'}`}
                     </div>
                     {isEditingStoryName ?
                         <form onSubmit={handleSubmitEditOfStoryName} className='edit-name-container'>
@@ -250,7 +245,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                             </button>
                         </form> :
                         <h1 onClick={() => {
-                                if (isLoggedInMemberInSelectedStory || isViewingStory) {
+                                if (isLoggedInMemberInSelectedStory) {
                                     setIsEditingStoryName(true);
                                 }
                             }}
@@ -258,29 +253,33 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                             {selectedStoryData?.storyName}
                         </h1>}
                     <hr className='points-hr' ></hr>
-                    {isLoggedInMemberInSelectedStory || isViewingStory ?
-                        selectedStoryData?.members?.map((person: any, index: number) => {
-                            return (
-                                <StoryNameRowContainer
-                                    key={index}
-                                    allMemberData={selectedStoryData?.members}
-                                    personData={person}
-                                    index={index}
-                                    isViewingStory={isViewingStory}
-                                    removePersonFunction={handleStoryMemberRemoval}
-                                    loggedInUsername={loggedInUsername}
-                                />
-                            )
-                        }) :
+                    {selectedStoryData?.members?.map((person: any, index: number) => {
+                        return (
+                            <StoryNameRowContainer
+                                key={index}
+                                pointData={pointData}
+                                selectedStoryData={selectedStoryData}
+                                allMemberData={selectedStoryData?.members}
+                                personData={person}
+                                index={index}
+                                removePersonFunction={handleStoryMemberRemoval}
+                                isLoggedInMemberSelectedStory={isLoggedInMemberInSelectedStory}
+                                hasRevealedPoints={hasRevealedPoints}
+                                loggedInUsername={loggedInUsername}
+                            />
+                        )
+                    })}
+                    {!isLoggedInMemberInSelectedStory ? 
                         <div className='d-flex justify-content-center join-btn-container'>
                             <button onClick={handleJoiningAStory} className='p-4 join-btn'>
                                 {`${formatMessage('Site.Login.Join', currentLanguage)}`}
                             </button>
-                            <button onClick={() => setIsViewingStory(true)} className='p-4 view-btn'>
-                                {`${formatMessage('Site.Common.View', currentLanguage)}`}
+                        </div> :
+                        <div className='d-flex justify-content-center reveal-btn-container'>
+                            <button onClick={() => setHasRevealedPoints(!hasRevealedPoints)} className='p-4 reveal-btn'>
+                                {`${formatMessage(hasRevealedPoints ? 'Site.Pointing.HidePoints' : 'Site.Pointing.RevealPoints', currentLanguage)}`}
                             </button>
-                        </div>
-                    }
+                        </div>}
                 </div>
                 <div className='point-data-history-stretch'>
                     <div className='point-data-history-container' >

@@ -14,7 +14,7 @@ interface IAddRemoveModal {
 
 export const AddRemoveModal = ({ isAddingName, isAddingStory, setSelectedStory, isVisible, closeModalFunction }: IAddRemoveModal): ReactElement => {
     const { currentLanguage, selectedTeam, nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, currentPage,
-    pointData, setPointData, updatePointingData, loggedInUsername } = usePageDataContext();
+    pointData, setPointData, updatePointingData, loggedInUsername, hasRevealedPoints, setHasRevealedPoints } = usePageDataContext();
 
     const handleSubmittingNewName = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -62,6 +62,9 @@ export const AddRemoveModal = ({ isAddingName, isAddingStory, setSelectedStory, 
             setPointData(updatedPointData);
             setSelectedStory(updatedPointData?.filter((data: any) => data?.storyId === randomStoryId)[0]);
             updatePointingData(updatePointingData);
+            if (hasRevealedPoints) {
+                setHasRevealedPoints(false);
+            }
             window.scrollTo(0,0);
 
             closeModalFunction();

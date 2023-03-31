@@ -64,6 +64,20 @@ export const pageTranslations: Translations<TPageTranslationKeys> = {
         cn: '选择点:',
         al: '$%^#$%&:'
     },
+    'Site.Pointing.RevealPoints': {
+        en: 'Reveal Points',
+        hi: 'अंक प्रकट करें',
+        es: 'Revelar puntos',
+        cn: '显示点数',
+        al: '()##$%&)!#@#'
+    },
+    'Site.Pointing.HidePoints': {
+        en: 'Hide Points',
+        hi: 'अंक छुपाएं',
+        es: 'Ocultar puntos',
+        cn: '隐藏点',
+        al: '@$#$@#**('
+    },
     'Site.Pointing.AvgPoints': {
         en: 'Average Points',
         hi: 'औसत अंक',

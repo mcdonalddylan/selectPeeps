@@ -4,7 +4,8 @@ import { usePageDataContext } from '../../context/PageDataProvider/PageDataProvi
 import { formatMessage } from '../../utils/translationUtils/translationUtils';
 
 export const NavBarHeader = (): ReactElement => {
-    const { currentLanguage, setCurrentPage, currentPage, isRandomizing } = usePageDataContext();
+    const { currentLanguage, setCurrentPage, currentPage, isRandomizing, hasRevealedPoints,
+        setHasRevealedPoints } = usePageDataContext();
 
     return (
         <div className='nav-container'>
@@ -19,6 +20,9 @@ export const NavBarHeader = (): ReactElement => {
                             onClick={() => {
                                 if(currentPage !== 'retro' && !isRandomizing) {
                                     localStorage.setItem('pagePreference', 'retro');
+                                    if (hasRevealedPoints) {
+                                        setHasRevealedPoints(false);
+                                    }
                                     setCurrentPage('retro');
                                 }
                             }}
@@ -32,6 +36,9 @@ export const NavBarHeader = (): ReactElement => {
                             onClick={() => {
                                 if(currentPage !== 'techtro' && !isRandomizing) {
                                     localStorage.setItem('pagePreference', 'techtro');
+                                    if (hasRevealedPoints) {
+                                        setHasRevealedPoints(false);
+                                    }
                                     setCurrentPage('techtro');
                                 }
                             }}
@@ -45,6 +52,9 @@ export const NavBarHeader = (): ReactElement => {
                             onClick={() => {
                                 if(currentPage !== 'pointing' && !isRandomizing) {
                                     localStorage.setItem('pagePreference', 'pointing');
+                                    if (hasRevealedPoints) {
+                                        setHasRevealedPoints(false);
+                                    }
                                     setCurrentPage('pointing');
                                 }
                             }}

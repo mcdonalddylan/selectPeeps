@@ -8,7 +8,7 @@
     "url": "git+https://github.com/mcdonalddylan/selectPeeps.git"
   },
   "scripts": {
-    "predeploy": "npm run build:production",
+    "predeploy": "npm run build:local",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "start:local": "cross-env REACT_APP_ENV=local npm run start",

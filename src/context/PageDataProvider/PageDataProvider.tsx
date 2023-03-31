@@ -44,6 +44,8 @@ interface IPageDataProviderContext {
     setSelectedStoryData: Function;
     isLoggedInMemberInSelectedStory: boolean;
     setIsLoggedInMemberInSelectedStory: Function;
+    hasRevealedPoints: boolean;
+    setHasRevealedPoints: Function;
 }
 
 interface IPageDataProviderProps {
@@ -70,6 +72,7 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
     const [shouldShowBottomAction, setShouldShowBottomAction] = useState<boolean>(true);
     const [shouldShowAddRemove, setShouldShowAddRemove] = useState<boolean>(false);
     const [isRandomizing, setIsRandomizing] = useState<boolean>(false);
+    const [hasRevealedPoints, setHasRevealedPoints] = useState<boolean>(false);
     const [nameData, setNameData] = useState<any[] | null>(null);
     const [pointData, setPointData] = useState<any[] | null>(null);
     const [selectedStoryData, setSelectedStoryData] = useState<any>(pointData ? pointData[0]: {});
@@ -193,8 +196,10 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
                 setPointData,
                 selectedStoryData,
                 setSelectedStoryData,
-                isLoggedInMemberInSelectedStory, 
-                setIsLoggedInMemberInSelectedStory
+                isLoggedInMemberInSelectedStory,
+                setIsLoggedInMemberInSelectedStory,
+                hasRevealedPoints,
+                setHasRevealedPoints
             }}
         >
             {children}

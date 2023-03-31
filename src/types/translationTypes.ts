@@ -28,6 +28,8 @@ export type TPageTranslationKeys = (
     'Site.Pointing.Button' |
     'Site.Pointing.StoryName' |
     'Site.Pointing.ChosenPoints' |
+    'Site.Pointing.RevealPoints' |
+    'Site.Pointing.HidePoints' |
     'Site.Pointing.AvgPoints' |
     'Site.Language.Button' |
     'Site.Login.Welcome' |

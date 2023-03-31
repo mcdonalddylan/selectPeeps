@@ -14,11 +14,11 @@
     .story-delete-container {
         .story-delete-btn {
             position: absolute;
-            top: 0.25rem;
+            top: 0.5rem;
             left: 0.25rem;
             width: 2rem;
             height: 1.5rem;
-            font-size: 20px;
+            font-size: 15px;
             font-family: 'Montserrat';
             color: $primary;
             border: 0;
@@ -59,9 +59,9 @@
             border: 0;
             border-radius: 20px;
             background-color: $alert-success;
-            color: $accent-dark;
+            color: $primary;
             font-weight: 700;
-            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            box-shadow: 2px 2px $primary, 4px 4px $primary;
             transition: all 0.2s ease;
         }
         
@@ -78,9 +78,9 @@
             border: 0;
             border-radius: 20px;
             background-color: $alert-error;
-            color: $accent-dark;
+            color: $primary;
             font-weight: 700;
-            box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
+            box-shadow: 2px 2px $primary, 4px 4px $primary;
             transition: all 0.2s ease;
         }
         
@@ -175,21 +175,26 @@
             box-shadow: 0 0;
             transition: all 0.2s ease;
         }
+    }
 
-        .view-btn {
+    .reveal-btn-container {
+        margin: 1rem auto 0;
+        padding: 1rem;
+        
+        .reveal-btn {
             margin: 0 1rem;
             padding: 1rem 2rem !important;
             font-size: 20px;
             border: 0;
             border-radius: 20px;
-            background-color: $accent-med-light;
+            background-color: $accent-tint;
             color: $accent-dark;
             font-weight: 700;
             box-shadow: 2px 2px $accent-dark, 4px 4px $accent-dark;
             transition: all 0.2s ease;
         }
 
-        .view-btn:hover, .view-btn:active {
+        .reveal-btn:hover, .reveal-btn:active {
             transform: translate(4px, 4px);
             box-shadow: 0 0;
             transition: all 0.2s ease;
@@ -201,12 +206,12 @@
         position: absolute;
         top: -1rem;
         right: -1rem;
-        font-size: 50px;
+        font-size: 20px !important;
         font-weight: 700;
         border: 3px solid white;
         background-color: $accent;
         border-radius: 50%;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.5rem !important;
     }
     
     .average-points-container {
@@ -414,6 +419,22 @@
 
         p {
             font-size: 13px;
+        }
+
+        .reveal-btn-container {
+            margin: 0 auto 0;
+            
+            .reveal-btn {
+                padding: 0.5rem 1rem !important;
+                font-size: 20px;
+                border-radius: 15px;
+            }
+    
+            .reveal-btn:hover, .reveal-btn:active {
+                transform: translate(4px, 4px);
+                box-shadow: 0 0;
+                transition: all 0.2s ease;
+            }
         }
 
         .chosen-point-container {

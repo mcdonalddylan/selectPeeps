@@ -4,7 +4,7 @@ import { formatMessage } from '../../utils/translationUtils/translationUtils';
 import './TeamSelectContainer.scss';
 
 export const TeamSelectContainer = (): ReactElement => {
-    const { currentLanguage, selectedTeam, setSelectedTeam } = usePageDataContext();
+    const { currentLanguage, selectedTeam, setSelectedTeam, hasRevealedPoints, setHasRevealedPoints } = usePageDataContext();
 
     const setSelectElement = (element: any, optionValToSelect: string) => {
         const optionElements = element?.options;
@@ -26,6 +26,9 @@ export const TeamSelectContainer = (): ReactElement => {
     const handleOnSelectTeam = (e: any) => {
         setSelectedTeam(e.target.value);
         localStorage.setItem('teamPreference', e.target.value);
+        if (hasRevealedPoints) {
+            setHasRevealedPoints(false);
+        }
     }
 
     return (

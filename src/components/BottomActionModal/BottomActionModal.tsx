@@ -6,7 +6,8 @@ import './BottomActionModal.scss';
 export const BottomActionModal = (): ReactElement => {
     const { currentLanguage, currentPage, isRandomizing, setIsRandomizing,
         nameData, setNameData, updateRetroMemberData, updateTechtroMemberData, isLocalEnvironment, loggedInUsername,
-        isLoggedInMemberInSelectedStory } = usePageDataContext();
+        isLoggedInMemberInSelectedStory, pointData, setPointData, updatePointingData, selectedStoryData, 
+        setSelectedStoryData } = usePageDataContext();
 
     const RANDOMIZE_SPEED = 150;
     let randomIntervalId : NodeJS.Timer;
@@ -87,7 +88,7 @@ export const BottomActionModal = (): ReactElement => {
     };
 
     const selectTheNextPerson = () => {
-        if (!isRandomizing && nameData && nameData?.length > 1) {
+        if (!isRandomizing) {
             const selectedMembersIndex = getSelectedMemberIndex();
             const updatedNameData: any[] = nameData;
             console.log('select mem index: ', selectedMembersIndex, ' | updatedNameData: ', updatedNameData);
@@ -95,7 +96,6 @@ export const BottomActionModal = (): ReactElement => {
                 updatedNameData[selectedMembersIndex].isSelected = false;
                 updatedNameData[selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1].isSelected = true;
 
-                const nextNameIndex = selectedMembersIndex+1 > nameData?.length-1 ? 0 : selectedMembersIndex+1; // TODO: Need to fix this logic
                 // Updating name data without replcaing the whole object (to fix animation)
                 setNameData((prevNameData: any[]) => [
                     ...prevNameData.slice(0, selectedMembersIndex),
@@ -105,13 +105,7 @@ export const BottomActionModal = (): ReactElement => {
                         team: prevNameData[selectedMembersIndex]?.team,
                         isSelected: false
                     },
-                    {
-                        id: prevNameData[nextNameIndex]?.id,
-                        name: prevNameData[nextNameIndex]?.name,
-                        team: prevNameData[nextNameIndex]?.team,
-                        isSelected: true
-                    },
-                    ...prevNameData.slice(nextNameIndex+1 > nameData?.length-1 ? nameData?.length : nextNameIndex+1, nameData?.length)
+                    ...prevNameData.slice(selectedMembersIndex+1, nameData?.length)
                 ]);
                 if (currentPage === 'retro') {
                     updateRetroMemberData(updatedNameData);
@@ -137,7 +131,53 @@ export const BottomActionModal = (): ReactElement => {
     };
 
     const updateLoggedInMembersPointValue = (pointUpdateValue: number) => {
-        //TODO: Update logged in member's point value based on value passed in
+        const selectedStoryIndex = pointData?.findIndex((storyData: any) => storyData?.storyId === selectedStoryData?.storyId);
+        const loggedInMembersIndex = selectedStoryData?.members?.findIndex((memberData: any) => memberData?.pointName === loggedInUsername);
+        console.log('members before current member: ', pointData[selectedStoryIndex]?.members.slice(0, loggedInMembersIndex))
+        console.log('logged in member: ', pointData[selectedStoryIndex]?.members[loggedInMembersIndex]);
+        console.log('members AFTER current member: ', pointData.slice(loggedInMembersIndex+1 > pointData[selectedStoryIndex]?.members?.length-1 ?
+            pointData[selectedStoryIndex]?.members?.length :
+            loggedInMembersIndex+1, pointData[selectedStoryIndex]?.members?.length))
+        if (selectedStoryIndex !== -1 && loggedInMembersIndex !== -1) {
+            setPointData((prevPointData: any[]) => [
+                ...prevPointData.slice(0, selectedStoryIndex),
+                {
+                    ...prevPointData[selectedStoryIndex],
+                    members: [
+                        ...prevPointData[selectedStoryIndex]?.members.slice(0, loggedInMembersIndex),
+                        {
+                            pointId: prevPointData[selectedStoryIndex]?.members[loggedInMembersIndex]?.pointId,
+                            pointName: loggedInUsername,
+                            pointValue: pointUpdateValue
+                        },
+                        ...prevPointData[selectedStoryIndex]?.members.slice(loggedInMembersIndex+1 > prevPointData[selectedStoryIndex]?.members?.length-1 ?
+                            prevPointData[selectedStoryIndex]?.members?.length :
+                            loggedInMembersIndex+1, prevPointData[selectedStoryIndex]?.members?.length)
+                    ]
+                },
+                ...prevPointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ]);
+            const newStoryData = [
+                ...pointData.slice(0, selectedStoryIndex),
+                {
+                    ...pointData[selectedStoryIndex],
+                    members: [
+                        ...pointData[selectedStoryIndex]?.members.slice(0, loggedInMembersIndex),
+                        {
+                            pointId: pointData[selectedStoryIndex]?.members[loggedInMembersIndex]?.pointId,
+                            pointName: loggedInUsername,
+                            pointValue: pointUpdateValue
+                        },
+                        ...pointData[selectedStoryIndex]?.members.slice(loggedInMembersIndex+1 > pointData[selectedStoryIndex]?.members?.length-1 ?
+                            pointData[selectedStoryIndex]?.members?.length :
+                            loggedInMembersIndex+1, pointData[selectedStoryIndex]?.members?.length)
+                    ]
+                },
+                ...pointData.slice(selectedStoryIndex+1 > pointData?.length-1 ? pointData?.length : selectedStoryIndex+1, pointData?.length)
+            ];
+            setSelectedStoryData(newStoryData[selectedStoryIndex]);
+            updatePointingData(newStoryData);
+        }
     };
 
     return (

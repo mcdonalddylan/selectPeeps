@@ -7,17 +7,38 @@
         width: 50%;
         text-align: center;
         margin: auto;
+        
+        p {
+            font-size: 18px;
+            padding: 0.75rem !important;
+        }
 
         .pointer-number {
             font-size: 14px;
         }
     }
+
+    .story-name-point-icon {
+        z-index: 20;
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        width: 2rem;
+        height: 1.5rem;
+        font-size: 17px;
+        font-family: 'Montserrat';
+        color: $primary;
+        border: 0;
+        background-color: #00000000;
+        font-weight: 800;
+        text-align: center;
+    }
     
     .story-name-delete-btn {
         z-index: 20;
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 0.75rem;
+        right: 0.75rem;
         width: 2rem;
         height: 1.5rem;
         font-size: 17px;
@@ -31,13 +52,17 @@
     }
 }
 
-.pointer-row-container:nth-child(even) {
-    background-color: #0000000a;
-    border-radius: 20px;
+.pointer-row-container:nth-child(odd) {
+    background-color: #00000007;
 }
 
 .select-name-row {
-    font-weight: 700;
+    font-weight: 700 !important;
+}
+
+.pointed-name-row {
+    background-color: #aaffaa33;
+    transition: all 0.3s ease;
 }
 
 @media only screen and (max-width: 768px) {
