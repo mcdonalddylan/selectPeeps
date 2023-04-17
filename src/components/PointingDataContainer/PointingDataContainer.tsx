@@ -14,7 +14,7 @@ interface IPointingDataContainerProps {
 export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPointingDataContainerProps): ReactElement => {
     const { currentLanguage, selectedTeam, getPointingData, pointData, setPointData, updatePointingData, 
         loggedInUsername, selectedStoryData, setSelectedStoryData, isLoggedInMemberInSelectedStory, 
-        setIsLoggedInMemberInSelectedStory, hasRevealedPoints, setHasRevealedPoints } = usePageDataContext();
+        setIsLoggedInMemberInSelectedStory, hasRevealedPoints, setHasRevealedPoints, isAdmin } = usePageDataContext();
     const [viewAddModal, setViewAddModal] = useState<boolean>(false);
     const [isRemoveButtonVisible, setIsRemoveButtonVisible] = useState<boolean>(true);
     const [isEditingStoryName, setIsEditingStoryName] = useState<boolean>(false);
@@ -194,7 +194,7 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
 
     return (<>
                 <div className='point-data-container' >
-                    {isRemoveButtonVisible &&
+                    {isRemoveButtonVisible && isAdmin &&
                         <div className='story-delete-container'>
                             <button
                                 className='story-delete-btn'
@@ -263,9 +263,9 @@ export const PointingDataContainer = ({ sortDataByTeam, sortDataByDate } : IPoin
                                 personData={person}
                                 index={index}
                                 removePersonFunction={handleStoryMemberRemoval}
-                                isLoggedInMemberSelectedStory={isLoggedInMemberInSelectedStory}
-                                hasRevealedPoints={hasRevealedPoints}
                                 loggedInUsername={loggedInUsername}
+                                hasRevealedPoints={hasRevealedPoints}
+                                isAdmin={isAdmin}
                             />
                         )
                     })}

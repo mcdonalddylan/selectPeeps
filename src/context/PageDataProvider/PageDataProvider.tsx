@@ -39,6 +39,7 @@ interface IPageDataProviderContext {
     nameData: any | null;
     setNameData: Function;
     pointData: any | null;
+    isAdmin: boolean;
     setPointData: Function;
     selectedStoryData: any;
     setSelectedStoryData: Function;
@@ -77,8 +78,21 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
     const [pointData, setPointData] = useState<any[] | null>(null);
     const [selectedStoryData, setSelectedStoryData] = useState<any>(pointData ? pointData[0]: {});
     const [loggedInUsername, setLoggedInUsername] = useState<string | null>(localStorage.getItem('username'));
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [isLoggedInMemberInSelectedStory, setIsLoggedInMemberInSelectedStory] = useState<boolean>(isUsernameInSelectedStory(selectedStoryData, loggedInUsername));
 
+    const determineIfAdmin = (): boolean => {
+        if (loggedInUsername?.toLocaleLowerCase().includes('jody') ||
+            loggedInUsername?.toLocaleLowerCase().includes('brad') ||
+            loggedInUsername?.toLocaleLowerCase().includes('nandish') ||
+            loggedInUsername?.toLocaleLowerCase().includes('shone') ||
+            loggedInUsername?.toLocaleLowerCase().includes('admin') ||
+            loggedInUsername?.toLocaleLowerCase().includes('cool')) {
+                return true;
+            } else {
+                return false;
+            }
+    };
 
     useEffect(() => {
         if (isLocalEnvironment) {
@@ -91,6 +105,14 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
             console.log('current selected team is: ', selectedTeam);
         };
     }, [selectedTeam]);
+
+    useEffect(() => {
+        if (determineIfAdmin() ) {
+            setIsAdmin(true);
+        } else {
+            setIsAdmin(false);
+        } 
+    }, [loggedInUsername]);
 
     const changeCurrentLanguage = (language: TSupportLanguages) => {
         switch(language){
@@ -190,6 +212,7 @@ export const PageDataProvider = ({children}: IPageDataProviderProps): ReactEleme
                 updatePointingData,
                 isRandomizing,
                 setIsRandomizing,
+                isAdmin,
                 nameData,
                 setNameData,
                 pointData,

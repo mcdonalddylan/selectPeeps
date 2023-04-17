@@ -8,9 +8,9 @@ interface IStoryNameRowContainerProps {
     personData: any;
     index: number;
     removePersonFunction: Function;
-    isLoggedInMemberSelectedStory: boolean;
     hasRevealedPoints: boolean;
     loggedInUsername: string | null;
+    isAdmin: boolean;
 }
 
 export const StoryNameRowContainer = ({
@@ -20,9 +20,9 @@ export const StoryNameRowContainer = ({
     personData,
     index,
     removePersonFunction,
-    isLoggedInMemberSelectedStory,
     hasRevealedPoints,
-    loggedInUsername }: IStoryNameRowContainerProps ): ReactElement => {
+    loggedInUsername,
+    isAdmin }: IStoryNameRowContainerProps ): ReactElement => {
     const [isRemoveVisible, setIsRemoveVisible] = useState<boolean>(false);
     const [isPointed, setIsPointed] = useState<boolean>(false);
 
@@ -78,7 +78,7 @@ export const StoryNameRowContainer = ({
                         personData?.pointValue}
                     </p>
                 </div>
-                {isRemoveVisible && isLoggedInMemberSelectedStory &&
+                {isRemoveVisible && (personData?.pointName === loggedInUsername || isAdmin) &&
                     <div className='story-name-delete-container'>
                         <button
                             className='story-name-delete-btn'
